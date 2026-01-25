@@ -1,8 +1,12 @@
 require("dotenv").config();
-const moongoose = require("mongoose");
+const mongoose = require("mongoose");
 const app = require ("./app");
 
-moongoose
+
+console.log("SERVER.JS CARREGADO"); 
+
+
+mongoose
     .connect(process.env.MONGO_URL)
     .then(() => {
         console.log("MongoDB conectado")
@@ -10,4 +14,4 @@ moongoose
             console.log(`Servidor rodando na porta ${process.env.PORT}`)
         });
     })
-    .catch((err) => console.log("Erro no mongoBD ". err))
+    .catch((err) => console.log("Erro no mongoBD ", err))

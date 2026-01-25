@@ -1,0 +1,45 @@
+### Criar cliente
+POST http://localhost:3333/clientes
+Content-Type: application/json
+
+{
+  "nome": "Maria",
+  "documento": "12345678901",
+  "email": "maria@email.com",
+  "telefone": "11999999999",
+  "endereco": "Rua A, 123"
+}
+
+
+
+### Listar todos os clientes
+GET http://localhost:3333/clientes
+Content-Type: application/json
+
+
+
+
+
+
+
+
+### Buscar cliente por ID
+GET http://localhost:3333/clientes/6975331f40ee5a001f3869a0
+Content-Type: application/json
+
+
+
+
+### Atualizar cliente
+PUT http://localhost:3333/clientes/6975331f40ee5a001f3869a0
+Content-Type: application/json
+
+{
+  "nome": "Cliente Atualizado",
+  "telefone": "11988888888"
+}
+
+### Deletar cliente
+DELETE http://localhost:3333/clientes/6975331f40ee5a001f3869a0
+Content-Type: application/json
+
