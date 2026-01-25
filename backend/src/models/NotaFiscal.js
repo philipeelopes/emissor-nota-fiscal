@@ -13,18 +13,29 @@ const NotaFiscalSchema = new mongoose.Schema(
             required: true,
         },
         descricao: String,
-        valor: {
+        valorTotal: {
             type: Number,
             required: true,
         },
         status: {
             type: String,
-            default: "EMITIDA"
+            enum: ["emitida", "cancelada"],
+            default: "EMITIDA",
         },
         numero: {
             type: Number,
             unique: true,
         },
+        itens: {
+            descricao: String,
+            quantidade: Number,
+            valorUnitario: Number,
+        },
+        dataEmissao: {
+            type: Date,
+            default: Date.now,
+        },
+
     },
     { timestamps: true }
 )
