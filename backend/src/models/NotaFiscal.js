@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const NotaFiscalSchema = new mongoose.Schema(
@@ -19,18 +20,30 @@ const NotaFiscalSchema = new mongoose.Schema(
         },
         status: {
             type: String,
-            enum: ["emitida", "cancelada"],
+            enum: ["EMITIDA", "CANCELADA"],
             default: "EMITIDA",
         },
         numero: {
             type: Number,
             unique: true,
         },
-        itens: {
-            descricao: String,
-            quantidade: Number,
-            valorUnitario: Number,
-        },
+        itens: [{
+            descricao: {
+                type: String,
+                required: true,
+            },
+            quantidade: {
+                type: Number,
+                required: true,
+                min: 1,
+            },
+            valorUnitario: {
+                type: Number,
+                required: true,
+                min: 0,
+            },
+        }
+        ],
         dataEmissao: {
             type: Date,
             default: Date.now,

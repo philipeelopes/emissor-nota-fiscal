@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const clientesRoutes = require("./routes/clientes.routes");
+const notasRoutes = require("./routes/notas.routes")
 
 
 console.log("APP.JS CARREGADO");
@@ -16,12 +17,12 @@ app.get("/teste", (req, res) => {
 });
 
 
-
 app.get("/health", (req, res) => {
     return res.json( {status : "OK"})
 });
 
 
 app.use("/clientes", clientesRoutes);
+app.use("/notas", notasRoutes);
 
 module.exports = app;

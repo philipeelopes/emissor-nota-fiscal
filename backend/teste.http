@@ -43,3 +43,42 @@ Content-Type: application/json
 DELETE http://localhost:3333/clientes/6975331f40ee5a001f3869a0
 Content-Type: application/json
 
+//=========================================================================
+//parte das notas                                                         =
+//=================================-=-=-=-=-=-=-=-=-=-=-=-==-=-===-===-=-==
+
+
+
+### Criar nota fiscal com itens
+POST http://localhost:3333/notas
+Content-Type: application/json
+
+{
+  "cliente":"6975377a40ee5a001f3869a6",
+  "tipo": "SERVICO",
+  "descricao": "Serviços prestados",
+  "itens": [
+    {
+      "descricao": "Desenvolvimento backend",
+      "quantidade": 2,
+      "valorUnitario": 150
+    },
+    {
+      "descricao": "Configuração servidor",
+      "quantidade": 1,
+      "valorUnitario": 200
+    }
+  ]
+}
+
+
+### Listar notas fiscais
+GET http://localhost:3333/notas
+
+
+### Buscar nota por ID
+GET http://localhost:3333/notas/69765ef2a6ba0f4aab7a6e03
+
+
+### Cancelar nota fiscal
+PUT http://localhost:3333/notas/69765ef2a6ba0f4aab7a6e03/cancelar
