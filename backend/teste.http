@@ -49,6 +49,8 @@ Content-Type: application/json
 
 
 
+
+
 ### Criar nota fiscal com itens
 POST http://localhost:3333/notas
 Content-Type: application/json
@@ -60,13 +62,13 @@ Content-Type: application/json
   "itens": [
     {
       "descricao": "Desenvolvimento backend",
-      "quantidade": 2,
+      "quantidade": 1,
       "valorUnitario": 150
     },
     {
       "descricao": "Configuração servidor",
-      "quantidade": 1,
-      "valorUnitario": 200
+      "quantidade": 2,
+      "valorUnitario": 250
     }
   ]
 }
@@ -80,5 +82,40 @@ GET http://localhost:3333/notas
 GET http://localhost:3333/notas/69765ef2a6ba0f4aab7a6e03
 
 
+
+
 ### Cancelar nota fiscal
 PUT http://localhost:3333/notas/69765ef2a6ba0f4aab7a6e03/cancelar
+
+
+### Atualizar nota
+PUT http://localhost:3333/notas/69765ef2a6ba0f4aab7a6e03
+
+Content-Type: application/json
+{
+  "cliente":"6975377a40ee5a001f3869a6",
+  "tipo": "SERVICO",
+  "descricao": "Serviços prestados",
+  "itens": [
+    {
+      "descricao": "Desenvolvimento backend",
+      "quantidade": 1,
+      "valorUnitario": 1250
+    },
+    {
+      "descricao": "Configuração servidor",
+      "quantidade": 12,
+      "valorUnitario": 2000
+    }
+  ]
+}
+
+### deletar notas
+DELETE http://localhost:3333/notas/69765ef2a6ba0f4aab7a6e03
+Content-Type: application/json
+
+
+
+### filtros
+
+GET /notas?status=EMITIDA&tipo=SERVICO
