@@ -116,6 +116,45 @@ Content-Type: application/json
 
 
 
-### filtros
+### Todas as notas
+GET http://localhost:3333/notas
 
-GET /notas?status=EMITIDA&tipo=SERVICO
+### Filtro por status
+GET http://localhost:3333/notas?status=EMITIDA
+
+### Filtro por cliente
+GET http://localhost:3333/notas?cliente=6975377a40ee5a001f3869a6
+
+### Filtro por tipo
+GET http://localhost:3333/notas?tipo=SERVICO
+
+### Filtro por período
+GET http://localhost:3333/notas?dataInicio=2026-01-01&dataFim=2026-01-31
+
+
+
+### teste
+GET http://localhost:3333/notas?page=1&limit=5
+
+###
+GET http://localhost:3333/notas?page=2&limit=5
+
+###
+GET http://localhost:3333/notas?status=EMITIDA&page=1&limit=3
+
+### valor crescente
+GET http://localhost:3333/notas?sortBy=valorTotal&order=asc
+
+### data de emissão
+GET http://localhost:3333/notas?sortBy=dataEmissao&order=desc
+
+### filtros
+GET http://localhost:3333/notas?status=EMITIDA&sortBy=valorTotal&order=desc&page=1&limit=3
+
+
+
+### testes de faturamento
+GET http://localhost:3333/notas/relatorios/faturamento
+
+###
+GET http://localhost:3333/notas/relatorios/faturamento?dataInicio=2026-01-01&dataFim=2026-01-31
