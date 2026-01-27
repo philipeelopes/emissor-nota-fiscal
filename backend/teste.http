@@ -89,7 +89,7 @@ PUT http://localhost:3333/notas/69765ef2a6ba0f4aab7a6e03/cancelar
 
 
 ### Atualizar nota
-PUT http://localhost:3333/notas/69765ef2a6ba0f4aab7a6e03
+PUT http://localhost:3333/notas/6976d1c85a1ed47ef1a6256b
 
 Content-Type: application/json
 {
@@ -98,12 +98,12 @@ Content-Type: application/json
   "descricao": "Serviços prestados",
   "itens": [
     {
-      "descricao": "Desenvolvimento backend",
+      "descricao": "Serviços atualizados",
       "quantidade": 1,
       "valorUnitario": 1250
     },
-    {
-      "descricao": "Configuração servidor",
+    { 
+      "descricao": "Configuração servidor, e paginação",
       "quantidade": 12,
       "valorUnitario": 2000
     }
@@ -158,3 +158,9 @@ GET http://localhost:3333/notas/relatorios/faturamento
 
 ###
 GET http://localhost:3333/notas/relatorios/faturamento?dataInicio=2026-01-01&dataFim=2026-01-31
+
+### relatorio cliente
+GET http://localhost:3333/notas/relatorios/por-cliente
+
+### emitidas canceladas
+GET http://localhost:3333/notas/relatorios/status
