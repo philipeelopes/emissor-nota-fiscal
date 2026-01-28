@@ -154,57 +154,66 @@ router.get("/relatorios/mensal", async (req, res) => {
 
 //atualizar por id
 router.put("/:id", async (req, res) => {
-    try {
-        const nota = await NotaFiscal.findById(req.params.id);
-
-        if (!nota) {
-            return res.status(404).json({ error: "Nota não encontrada" });
-        }
-        if (nota.status === "CANCELADA") {
-            return res.status(400).json({
-                error: "Não é possivel editar uma nota já cancelada"
-            });
-        }
 
 
-        const { descricao, itens } = req.body || {}
+  try {
 
-        //atualizar descrição
-        if (descricao !== undefined) {
-            nota.descricao = descricao;
-        }
-        //atualizar itens
-        if (itens) {
-            if (!Array.isArray(itens) || itens.length === 0) {
-                return res.status(400).json({
-                    error: "A nota deve ter ao menos um item"
-                });
-            }
-            for (const item of itens) {
-                if (item.quantidade <= 0 || item.valorUnitario <= 0) {
-                    return res.status(404).json({
-                        error: "Itens devem ter quantidade e valor unitário maiores que zero"
-                    })
-                }
-            }
-            //recalcular valor total
-            nota.itens = itens;
-            nota.valorTotal = itens.reduce((total, item) => {
-                return total + item.quantidade * item.valorUnitario;
-            }, 0);
-
-
-        }
-
-
-        await nota.save();
-        
-        return res.json(nota);
-    } catch (err) {
-        return res.status(400).json({ error: err.message });
+      if (!req.body) {
+      return res.status(400).json({
+        error: "Body da requisição não recebido. Envie JSON válido."
+      });
     }
 
-})
+
+    const { descricao, itens } = req.body;
+ 
+
+    
+
+    if (itens && (!Array.isArray(itens) || itens.length === 0)) {
+      return res.status(400).json({
+        error: "A nota deve ter ao menos um item"
+      });
+    }
+
+    if (itens) {
+      for (const item of itens) {
+        if (item.quantidade <= 0 || item.valorUnitario <= 0) {
+          return res.status(400).json({
+            error: "Itens devem ter quantidade e valor unitário maiores que zero"
+          });
+        }
+      }
+    }
+
+    const update = {};
+
+    if (descricao !== undefined) update.descricao = descricao;
+
+    if (itens) {
+      update.itens = itens;
+      update.valorTotal = itens.reduce(
+        (total, item) => total + item.quantidade * item.valorUnitario,
+        0
+      );
+    }
+
+    const notaAtualizada = await NotaFiscal.findOneAndUpdate(
+      { _id: req.params.id, status: { $ne: "CANCELADA" } },
+      { $set: update },
+      { new: true, runValidators: true }
+    );
+
+    if (!notaAtualizada) {
+      return res.status(404).json({ error: "Nota não encontrada ou cancelada" });
+    }
+
+    return res.json(notaAtualizada);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+});
+
 
 
 

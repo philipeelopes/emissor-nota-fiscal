@@ -16,7 +16,8 @@ const NotaFiscalSchema = new mongoose.Schema(
         descricao: String,
         valorTotal: {
             type: Number,
-            required: true,
+            default: 0,
+            
         },
         status: {
             type: String,
@@ -28,20 +29,10 @@ const NotaFiscalSchema = new mongoose.Schema(
             unique: true,
         },
         itens: [{
-            descricao: {
-                type: String,
-                required: true,
-            },
-            quantidade: {
-                type: Number,
-                required: true,
-                min: 1,
-            },
-            valorUnitario: {
-                type: Number,
-                required: true,
-                min: 0,
-            },
+            _id: false,
+            descricao: { type: String,required: true },
+            quantidade: { type: Number, required: true, min: 1 },
+            valorUnitario: { type: Number, required: true, min: 0 },
         }
         ],
         dataEmissao: {

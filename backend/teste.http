@@ -90,25 +90,24 @@ PUT http://localhost:3333/notas/69765ef2a6ba0f4aab7a6e03/cancelar
 
 ### Atualizar nota
 PUT http://localhost:3333/notas/6976d1c85a1ed47ef1a6256b
-
 Content-Type: application/json
+
 {
-  "cliente":"6975377a40ee5a001f3869a6",
-  "tipo": "SERVICO",
-  "descricao": "Serviços prestados",
+  "descricao": "Serviços autonomo",
   "itens": [
     {
       "descricao": "Serviços atualizados",
       "quantidade": 1,
       "valorUnitario": 1250
     },
-    { 
-      "descricao": "Configuração servidor, e paginação",
+    {
+      "descricao": "Configuração servidor e paginação",
       "quantidade": 12,
       "valorUnitario": 2000
     }
   ]
 }
+
 
 ### deletar notas
 DELETE http://localhost:3333/notas/69765ef2a6ba0f4aab7a6e03
