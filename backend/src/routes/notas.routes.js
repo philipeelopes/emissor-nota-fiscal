@@ -1,6 +1,6 @@
 const express = require("express")
 const notaFiscal = require("../models/NotaFiscal");
-const NotaFiscal = require("../models/NotaFiscal");
+const { criarNota } = require("../services/notas.service");
 
 const router = express.Router();
 
@@ -80,8 +80,8 @@ router.get("/relatorios/por-cliente", async (req, res) => {
     }
 })
 
-//relatorio de emitidas X canceladas
 
+//relatorio de emitidas X canceladas
 router.get("/relatorios/status", async (req, res) => {
     try {
         const resultado = await NotaFiscal.aggregate([
@@ -101,8 +101,8 @@ router.get("/relatorios/status", async (req, res) => {
 });
 
 
-// faturamento mensal 
 
+// faturamento mensal 
 router.get("/relatorios/mensal", async (req, res) => {
     try {
         const resultado = await NotaFiscal.aggregate([
@@ -218,6 +218,17 @@ router.put("/:id", async (req, res) => {
 
 
 // criar nota fiscal
+
+router.post("/", async (req, res) => {
+  try {
+    const nota = await criarNota(req.body);
+    return res.status(201).json(nota);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+});
+
+/*
 router.post("/", async (req, res) => {
     try {
         const { cliente, tipo, itens, descricao } = req.body;
@@ -257,7 +268,7 @@ router.post("/", async (req, res) => {
     } catch (err) {
         return res.status(400).json({ error: err.message });
     }
-});
+});*/
 
 
 //listas todas as notas

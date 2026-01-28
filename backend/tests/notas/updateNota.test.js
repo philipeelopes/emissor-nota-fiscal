@@ -52,8 +52,9 @@ describe("PUT /notas/:id", () => {
 
 
 
-
-
+//======================================
+// Teste: não atualizar nota cancelada
+describe("PUT /notas/:id - nota cancelada", () => {
 it("não deve permitir atualizar uma nota cancelada", async () => {
   const cliente = await Cliente.create({
     nome: "Empresa Cancelada",
@@ -85,4 +86,61 @@ it("não deve permitir atualizar uma nota cancelada", async () => {
 
   expect(response.status).toBe(404);
   expect(response.body.error).toBe("Nota não encontrada ou cancelada");
+});
+})
+
+
+//==============================================
+//Atualizar nota inexistente
+
+
+describe("PUT /notas/:id - nota inexistente", () => {
+  it("deve retornar erro ao tentar atualizar nota inexistente", async () => {
+    const idInvalido = new mongoose.Types.ObjectId();
+
+    const response = await request(app)
+      .put(`/notas/${idInvalido}`)
+      .send({
+        descricao: "Tentativa de edição"
+      });
+
+    expect(response.status).toBe(404);
+    expect(response.body.error).toBeDefined();
+  });
+});
+
+
+//=================================================
+//Não permitir atualizar nota CANCELADA
+
+
+describe("PUT /notas/:id - nota cancelada", () => {
+  it("não deve permitir atualizar uma nota cancelada", async () => {
+    const cliente = await Cliente.create({
+      nome: "Empresa Teste",
+      email: "teste@empresa.com",
+      documento: "12345678000199"
+    });
+
+    const nota = await NotaFiscal.create({
+      cliente: cliente._id,
+      tipo: "SERVICO",
+      descricao: "Nota original",
+      itens: [
+        { descricao: "Serviço", quantidade: 1, valorUnitario: 100 }
+      ],
+      valorTotal: 100,
+      status: "CANCELADA",
+      numero: 999
+    });
+
+    const response = await request(app)
+      .put(`/notas/${nota._id}`)
+      .send({
+        descricao: "Tentativa de alteração"
+      });
+
+    expect(response.status).toBe(404);
+    expect(response.body.error).toBeDefined();
+  });
 });

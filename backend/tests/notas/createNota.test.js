@@ -28,6 +28,9 @@ describe("POST /notas", () => {
 });
 
 
+//=======================================
+//criar nota sem itens
+describe("POST /notas - validações", () => {
   it("não deve criar nota sem itens", async () => {
    const cliente = await Cliente.create({
     nome: "Empresa Teste",
@@ -45,4 +48,5 @@ describe("POST /notas", () => {
 
   expect(response.status).toBe(400);
   expect(response.body.error).toBeDefined();
+});
 });
