@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const clientesRoutes = require("./routes/clientes.routes");
 const notasRoutes = require("./routes/notas.routes")
+const relatoriosRoutes = require("./routes/relatorios.routes");
 
 
 console.log("APP.JS CARREGADO");
@@ -24,5 +25,9 @@ app.get("/health", (req, res) => {
 
 app.use("/clientes", clientesRoutes);
 app.use("/notas", notasRoutes);
+
+
+//relatorios
+app.use("/relatorios", relatoriosRoutes);
 
 module.exports = app;
