@@ -3,9 +3,8 @@ const NotaFiscal = require("../models/NotaFiscal");
 
 
 
-// criar nota fiscals
-const NotaFiscal = require("../models/NotaFiscal");
 
+// criar nota fiscal
 async function criarNota({ cliente, tipo, itens, descricao }) {
   if (!itens || itens.length === 0) {
     throw new Error("A nota precisa ter ao menos um item");
@@ -40,3 +39,4 @@ async function criarNota({ cliente, tipo, itens, descricao }) {
 module.exports = {
   criarNota,
 };
+
