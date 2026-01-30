@@ -1,61 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1769704551592" clover="3.2.0">
-  <project timestamp="1769704551592" name="All files">
-    <metrics statements="203" coveredstatements="139" conditionals="71" coveredconditionals="35" methods="27" coveredmethods="14" elements="301" coveredelements="188" complexity="0" loc="203" ncloc="203" packages="6" files="16" classes="16"/>
+<coverage generated="1769737567578" clover="3.2.0">
+  <project timestamp="1769737567578" name="All files">
+    <metrics statements="211" coveredstatements="142" conditionals="75" coveredconditionals="35" methods="28" coveredmethods="14" elements="314" coveredelements="191" complexity="0" loc="211" ncloc="211" packages="7" files="17" classes="17"/>
     <package name="src">
-      <metrics statements="17" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="18" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="app.js" path="E:\html e css\emissor-nota-fiscal\backend\src\app.js">
-        <metrics statements="17" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="18" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="8" type="stmt"/>
         <line num="2" count="8" type="stmt"/>
         <line num="3" count="8" type="stmt"/>
         <line num="4" count="8" type="stmt"/>
         <line num="5" count="8" type="stmt"/>
-        <line num="8" count="8" type="stmt"/>
-        <line num="10" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
         <line num="13" count="8" type="stmt"/>
-        <line num="14" count="8" type="stmt"/>
-        <line num="16" count="8" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="21" count="8" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
         <line num="26" count="8" type="stmt"/>
-        <line num="27" count="8" type="stmt"/>
-        <line num="31" count="8" type="stmt"/>
-        <line num="33" count="8" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="48" coveredstatements="30" conditionals="2" coveredconditionals="0" methods="10" coveredmethods="6"/>
+      <metrics statements="52" coveredstatements="31" conditionals="2" coveredconditionals="0" methods="10" coveredmethods="6"/>
       <file name="notas.controller.js" path="E:\html e css\emissor-nota-fiscal\backend\src\controllers\notas.controller.js">
-        <metrics statements="27" coveredstatements="16" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="3"/>
+        <metrics statements="31" coveredstatements="17" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="3"/>
         <line num="1" count="8" type="stmt"/>
         <line num="2" count="8" type="stmt"/>
         <line num="3" count="8" type="stmt"/>
         <line num="4" count="8" type="stmt"/>
         <line num="5" count="8" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="34" count="6" type="stmt"/>
-        <line num="35" count="6" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="38" count="5" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="33" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="57" count="8" type="stmt"/>
+        <line num="51" count="6" type="stmt"/>
+        <line num="52" count="6" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="55" count="5" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="86" count="8" type="stmt"/>
       </file>
       <file name="relatorios.controller.js" path="E:\html e css\emissor-nota-fiscal\backend\src\controllers\relatorios.controller.js">
         <metrics statements="21" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
@@ -80,6 +85,15 @@
         <line num="37" count="1" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="50" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.middlewares">
+      <metrics statements="3" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="error.middleware.js" path="E:\html e css\emissor-nota-fiscal\backend\src\middlewares\error.middleware.js">
+        <metrics statements="3" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="4" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.models">

@@ -3,9 +3,10 @@ const cors = require("cors");
 const clientesRoutes = require("./routes/clientes.routes");
 const notasRoutes = require("./routes/notas.routes")
 const relatoriosRoutes = require("./routes/relatorios.routes");
+const errorMiddleware = require("./middlewares/error.middleware");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./docs/swagger");
 
-
-console.log("APP.JS CARREGADO");
 
 const app = express();
 
@@ -18,10 +19,14 @@ app.get("/teste", (req, res) => {
 });
 
 
-app.get("/health", (req, res) => {
-    return res.json( {status : "OK"})
+app.get("/", (req, res) => {
+  res.json({
+    status: "OK",
+    message: "API Emissor de Nota Fiscal rodando 🚀"
+  });
 });
 
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/clientes", clientesRoutes);
 app.use("/notas", notasRoutes);
@@ -29,5 +34,7 @@ app.use("/notas", notasRoutes);
 
 //relatorios
 app.use("/relatorios", relatoriosRoutes);
+
+app.use(errorMiddleware);
 
 module.exports = app;
