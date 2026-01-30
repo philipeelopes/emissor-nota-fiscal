@@ -91,8 +91,24 @@ router.get("/", notasController.listar);
 
 
 
-
-
+/**
+ * @swagger
+ * /notas/{id}:
+ *   get:
+ *     summary: Buscar nota fiscal por ID
+ *     tags: [Notas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Nota encontrada
+ *       404:
+ *         description: Nota não encontrada
+ */
 router.get("/:id", notasController.buscarPorId);
 
 

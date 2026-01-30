@@ -7,7 +7,7 @@ console.log("SERVER.JS CARREGADO");
 
 
 mongoose
-    .connect(process.env.MONGO_URL)
+    .connect(process.env.MONGO_URI)
     .then(() => {
         console.log("MongoDB conectado")
         app.listen(process.env.PORT, () => {
