@@ -18,11 +18,14 @@ app.get("/teste", (req, res) => {
   res.json({ ok: true });
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
 
 app.get("/", (req, res) => {
   res.json({
     status: "OK",
-    message: "API Emissor de Nota Fiscal rodando 🚀"
+    message: "API Emissor de Nota Fiscal rodando"
   });
 });
 

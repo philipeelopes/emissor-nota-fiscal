@@ -33,8 +33,8 @@ src/
 │   ├── atualizarNota.service.js
 │   ├── cancelarNota.service.js
 │   └── relatorios/
+│       ├── faturamento.service.js
 │       ├── mensal.service.js
-│       ├── porCliente.service.js
 │       └── status.service.js
 ├── models/
 │   ├── NotaFiscal.js
@@ -47,6 +47,10 @@ src/
 │   └── error.middleware.js
 └── tests/
 ```
+
+### Healthcheck
+GET /health
+
 
 📌 **Arquitetura baseada em Controller + Service**, garantindo separação de responsabilidades e escalabilidade.
 
@@ -115,7 +119,7 @@ npm install
 
 ```env
 PORT=3333
-MONGODB_URI=sua_string_de_conexao_mongodb
+MONGO_URI=mongodb://localhost:27017/emissor-nota
 ```
 
 ### 4️⃣ Rodar o projeto
@@ -134,6 +138,19 @@ npm start
 
 ---
 
+
+## 🐳 Executando com Docker
+
+O projeto está preparado para rodar via **Docker + Docker Compose**, incluindo MongoDB.
+
+### Subir a aplicação:
+```bash
+docker-compose up --build
+
+---
+
+
+
 ## 🌐 Rotas Principais
 
 ### Notas
@@ -149,6 +166,21 @@ npm start
 * `GET /relatorios/mensal`
 * `GET /relatorios/por-cliente`
 * `GET /relatorios/status`
+
+---
+
+## 📚 Documentação da API (Swagger)
+
+A API possui documentação interativa gerada com **Swagger / OpenAPI**.
+
+Após rodar o projeto, acesse:
+
+http://localhost:3333/docs
+
+Nela é possível:
+- Visualizar todas as rotas
+- Testar endpoints diretamente pelo navegador
+- Ver exemplos de payloads e respostas
 
 ---
 
