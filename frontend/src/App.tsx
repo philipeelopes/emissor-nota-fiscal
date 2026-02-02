@@ -1,18 +1,27 @@
-import NotasPage from "./pages/NotasPage";
+import NotasPage from "./pages/notas/NotasPage";
 import Header from "./components/Header";
-import Container  from "./components/Container";
+import Container from "./components/Container";
+import './App.css';
+import { ClientesPage } from "./pages/clientes/ClientesPage";
 
- 
+
+
+
 export default function App() {
-return(
-  <div>
+  return (
+    
+
+      <div>
         <Header />
-      <Container>
-        <NotasPage />
-      </Container>
-      
-  </div>
-) 
+        <Container>
+          <NotasPage />
+        </Container>
+        <ClientesPage/>
+
+      </div>
+    
+
+  )
 
 }
 

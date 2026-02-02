@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { api } from "../api/api";
-import type { NotaFiscal } from "../types/NotaFiscal";
-import styles from "../pages/Notas.module.css"
+import { api } from "../../api/api";
+import type { NotaFiscal } from "../../types/NotaFiscal";
+import styles from "../notas/Notas.module.css"
 
 export default function NotasPage() {
     const [notas, setNotas] = useState<NotaFiscal[]>([]);
