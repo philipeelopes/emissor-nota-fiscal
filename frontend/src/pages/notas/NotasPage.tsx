@@ -33,7 +33,7 @@ export default function NotasPage() {
           <tbody>
             {notas.map((nota) => (
               <tr key={nota._id}>
-                <td>{nota.cliente}</td>
+                <td>{nota.cliente.nome}</td>
                 <td>
                   <span
                     className={
