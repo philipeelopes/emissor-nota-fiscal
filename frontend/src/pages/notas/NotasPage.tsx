@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "../../api/api";
 import type { NotaFiscal } from "../../types/NotaFiscal";
+import { NovaNota } from "./NovaNota";
 import styles from "../notas/Notas.module.css"
 
 export default function NotasPage() {
@@ -15,6 +16,9 @@ export default function NotasPage() {
 
       return (
     <div className={styles.container}>
+
+      <NovaNota />
+      
       <h2 className={styles.title}>Notas Fiscais</h2>
 
       {notas.length === 0 && (
@@ -33,7 +37,7 @@ export default function NotasPage() {
           <tbody>
             {notas.map((nota) => (
               <tr key={nota._id}>
-                <td>{nota.cliente.nome}</td>
+                <td>{nota.cliente}</td>
                 <td>
                   <span
                     className={

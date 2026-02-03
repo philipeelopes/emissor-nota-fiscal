@@ -1,8 +1,6 @@
-export interface ItemNota{
-    descricao: string;
-    quantidade: number;
-    valorUnitario: number;
-}
+import type { ItemNota } from "./ItemNota";
+
+
 
 export interface NotaFiscal{
     _id: string;

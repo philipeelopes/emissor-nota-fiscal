@@ -36,7 +36,19 @@ async function criarNota({ cliente, tipo, itens, descricao }) {
   });
 }
 
+async function buscarNotaPorId(id) {
+  const nota = await NotaFiscal.findById(id)
+    .populate("cliente");
+
+  if (!nota) {
+    throw new Error("Nota fiscal não encontrada");
+  }
+
+  return nota;
+}
+
 module.exports = {
-  criarNota,
+  criarNota, 
+  buscarNotaPorId,
 };
 
