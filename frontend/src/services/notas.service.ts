@@ -2,6 +2,14 @@ import { api } from "../api/api"
 import type { NotaFiscal } from "../types/NotaFiscal"
 
 
+export async function buscarNotaPorId(
+  id: string
+): Promise<NotaFiscal> {
+  const response = await api.get(`/notas/${id}`);
+  return response.data;
+}
+
+
 export async function listarNotas(): Promise<NotaFiscal[]> {
     const response = await api.get("/notas");
     return response.data;

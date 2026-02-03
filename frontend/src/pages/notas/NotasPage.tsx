@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "../../api/api";
 import type { NotaFiscal } from "../../types/NotaFiscal";
+import { Link } from "react-router-dom";
 import { NovaNota } from "./NovaNota";
 import styles from "../notas/Notas.module.css"
 
@@ -37,7 +38,7 @@ export default function NotasPage() {
           <tbody>
             {notas.map((nota) => (
               <tr key={nota._id}>
-                <td>{nota.cliente}</td>
+                <td>{nota.cliente.nome}</td>
                 <td>
                   <span
                     className={
@@ -50,6 +51,15 @@ export default function NotasPage() {
                   </span>
                 </td>
                 <td>R$ {nota.valorTotal.toFixed(2)}</td>
+
+                 <td>
+                  <Link
+                    to={`/notas/${nota._id}`}
+                    className={styles.link}
+                  >
+                    Ver detalhes
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -1,14 +1,26 @@
-import type { ItemNota } from "./ItemNota";
 
 
+export type Cliente = {
+  _id: string;
+  nome: string;
+  email: string;
+  documento: string;
+};
 
-export interface NotaFiscal{
-    _id: string;
-    cliente: string;
-    tipo: string;
-    descricao?: string;
-    status: "ATIVA" | "CANCELADA";
-    itens: ItemNota[];
-    valorTotal: number;
-    createdAt: string;
-}
+export type ItemNota = {
+  descricao: string;
+  quantidade: number;
+  valorUnitario: number;
+};
+
+export type NotaFiscal = {
+  _id: string;
+  numero: number;
+  cliente: Cliente; // 👈 agora é objeto, não string
+  tipo: "SERVICO" | "PRODUTO";
+  descricao?: string;
+  itens: ItemNota[];
+  valorTotal: number;
+  status: "EMITIDA" | "CANCELADA";
+  dataEmissao: string;
+};
