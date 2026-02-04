@@ -13,7 +13,12 @@ export default function DetalhesNota() {
     if (!id) return;
 
     buscarNotaPorId(id)
-      .then(setNota)
+      .then((data) =>
+        setNota({
+          ...data,
+          itens: data.itens ?? [],
+        })
+      )
       .catch(() => alert("Erro ao carregar nota"))
       .finally(() => setLoading(false));
   }, [id]);
@@ -21,11 +26,24 @@ export default function DetalhesNota() {
   if (loading) return <p>Carregando...</p>;
   if (!nota) return <p>Nota não encontrada</p>;
 
+
+  const totalCalculado =
+  nota?.itens?.reduce(
+    (total, item) =>
+      total + Number(item.quantidade) * Number(item.valorUnitario),
+    0
+  ) ?? 0;
+
   return (
     <div className={styles.container}>
       <h2>Nota Fiscal Nº {nota.numero}</h2>
 
-      <p><strong>Cliente:</strong> {nota.cliente.nome}</p>
+      <p>
+        <strong>Cliente:</strong>{" "}
+        {nota?.cliente && typeof nota.cliente === "object"
+          ? nota.cliente.nome
+          : "Cliente não carregado"}
+      </p>
       <p><strong>Status:</strong> {nota.status}</p>
       <p><strong>Tipo:</strong> {nota.tipo}</p>
       <p><strong>Data:</strong> {new Date(nota.dataEmissao).toLocaleDateString()}</p>
@@ -42,18 +60,26 @@ export default function DetalhesNota() {
           </tr>
         </thead>
         <tbody>
-          {nota.itens.map((item, index) => (
-            <tr key={index}>
-              <td>{item.descricao}</td>
-              <td>{item.quantidade}</td>
-              <td>R$ {item.valorUnitario.toFixed(2)}</td>
-              <td>R$ {(item.quantidade * item.valorUnitario).toFixed(2)}</td>
+          {Array.isArray(nota.itens) && nota.itens.length > 0 ? (
+            nota.itens.map((item, index) => (
+              <tr key={index}>
+                <td>{item.descricao}</td>
+                <td>{item.quantidade}</td>
+                <td>R$ {Number(item.valorUnitario).toFixed(2)}</td>
+                <td>
+                  R$ {(Number(item.quantidade) * Number(item.valorUnitario)).toFixed(2)}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={4}>Nenhum item encontrado</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 
-      <h3>Total da Nota: R$ {nota.valorTotal.toFixed(2)}</h3>
+     <h3>Total da Nota: R$ {totalCalculado.toFixed(2)}</h3>
     </div>
   );
 }

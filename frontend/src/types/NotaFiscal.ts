@@ -9,14 +9,14 @@ export type Cliente = {
 
 export type ItemNota = {
   descricao: string;
-  quantidade: number;
-  valorUnitario: number;
+  quantidade: string;
+  valorUnitario: string;
 };
 
 export type NotaFiscal = {
   _id: string;
   numero: number;
-  cliente: Cliente; // 👈 agora é objeto, não string
+  cliente: Cliente; 
   tipo: "SERVICO" | "PRODUTO";
   descricao?: string;
   itens: ItemNota[];

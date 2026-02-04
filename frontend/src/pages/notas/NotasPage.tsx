@@ -37,7 +37,9 @@ export default function NotasPage() {
           </thead>
           <tbody>
             {notas.map((nota) => (
-              <tr key={nota._id}>
+              <tr
+                key={nota._id}
+              >
                 <td>
                   <Link to={`/notas/${nota._id}`}>
                     {nota.cliente.nome}
