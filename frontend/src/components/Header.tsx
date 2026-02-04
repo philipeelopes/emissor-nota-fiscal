@@ -6,9 +6,10 @@ export default function Header() {
     <header className={styles.header}>
       <h1>Emissor NF</h1>
 
-      <nav>
-        <Link to="/notas">Notas</Link>
-        <Link to="/clientes">Clientes</Link>
+      <nav className={styles.menu}>
+        <Link to="/notas" className={styles.nota}>Notas</Link>
+        <Link to="/clientes" className={styles.clientes}>Clientes</Link>
+        <Link to="/relatorios" className={styles.relatorios}>Relatórios</Link>
       </nav>
     </header>
   );

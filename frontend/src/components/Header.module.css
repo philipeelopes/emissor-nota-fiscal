@@ -4,3 +4,41 @@
     background-color: #091519 ;
     color: #fff;
 }
+
+.menu{
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 60px;
+}
+
+.nota, .clientes, .relatorios{
+    font-weight: bolder;
+    text-decoration: none;
+    color: white;
+    transition: 0.5s;
+}
+
+.nota:hover, .clientes:hover{
+    color: #D4A97D;
+    transition: 0.5s;
+    border-bottom: 2px solid #D4A97D;
+   
+}
+
+.relatorios{
+    background-image: linear-gradient(#D4A97D);
+    color: 091519 ;
+    padding: 10px 25px;
+    border-radius: 40px;
+    transition: 0.3s;
+}
+
+.relatorios:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+    background-image: linear-gradient(#D4A97D, #E6CA7F);
+
+}
+

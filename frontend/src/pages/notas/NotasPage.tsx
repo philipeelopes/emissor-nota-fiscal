@@ -6,20 +6,20 @@ import { NovaNota } from "./NovaNota";
 import styles from "../notas/Notas.module.css"
 
 export default function NotasPage() {
-    const [notas, setNotas] = useState<NotaFiscal[]>([]);
+  const [notas, setNotas] = useState<NotaFiscal[]>([]);
 
-    useEffect(() => {
-        api.get<{ notas: NotaFiscal[] }>("/notas").then((response) => {
-            setNotas(response.data.notas);
-        });
-    }, []);
+  useEffect(() => {
+    api.get<{ notas: NotaFiscal[] }>("/notas").then((response) => {
+      setNotas(response.data.notas);
+    });
+  }, []);
 
 
-      return (
+  return (
     <div className={styles.container}>
 
       <NovaNota />
-      
+
       <h2 className={styles.title}>Notas Fiscais</h2>
 
       {notas.length === 0 && (
@@ -38,7 +38,11 @@ export default function NotasPage() {
           <tbody>
             {notas.map((nota) => (
               <tr key={nota._id}>
-                <td>{nota.cliente.nome}</td>
+                <td>
+                  <Link to={`/notas/${nota._id}`}>
+                    {nota.cliente.nome}
+                  </Link>
+                </td>
                 <td>
                   <span
                     className={
@@ -52,7 +56,7 @@ export default function NotasPage() {
                 </td>
                 <td>R$ {nota.valorTotal.toFixed(2)}</td>
 
-                 <td>
+                <td>
                   <Link
                     to={`/notas/${nota._id}`}
                     className={styles.link}
