@@ -40,8 +40,8 @@ export default function NotasPage() {
               <tr
                 key={nota._id}
               >
-                <td>
-                  <Link to={`/notas/${nota._id}`}>
+                <td >
+                  <Link className={styles.cliente} to={`/notas/${nota._id}`}>
                     {nota.cliente.nome}
                   </Link>
                 </td>

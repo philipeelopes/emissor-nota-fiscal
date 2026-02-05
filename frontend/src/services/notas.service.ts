@@ -23,3 +23,9 @@ export async function criarNota(data: {
     const response = await api.post("/notas", data);
     return response.data;
 }
+
+export async function CancelarNota(id: string){
+  const response = await api.put(`/notas/cancelar/${id}`);
+  return response.data;
+
+}
