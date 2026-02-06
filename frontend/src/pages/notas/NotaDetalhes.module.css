@@ -35,4 +35,11 @@
   transition: 0.4s;
 }
 
+.cancelButton:hover {
+  background-color: #c0392b;
+  box-shadow: 0px 0px 15px #e74c3c80;
+  transform: scale(1.05);
+  transition: 0.4s;
+}
+
 

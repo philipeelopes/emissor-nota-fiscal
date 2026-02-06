@@ -25,7 +25,7 @@ export async function criarNota(data: {
 }
 
 export async function CancelarNota(id: string){
-  const response = await api.put(`/notas/cancelar/${id}`);
+  const response = await api.put(`/notas/${id}/cancelar`);
   return response.data;
 
 }

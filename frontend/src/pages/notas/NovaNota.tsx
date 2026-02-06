@@ -126,11 +126,11 @@ export function NovaNota() {
                 </div>
             ))}
 
-            <button type="button" onClick={adicionarItem}>
+            <button className={styles.adicionarItem} type="button" onClick={adicionarItem}>
                 + Adicionar Item
             </button>
 
-            <button type="submit" disabled={loading}>
+            <button className={styles.emitir} type="submit" disabled={loading}>
                 {loading ? "Emitindo..." : "Emitir Nota"}
             </button>
         </form>

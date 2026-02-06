@@ -42,3 +42,16 @@
 
 }
 
+.home{
+    font-weight: bolder;
+    text-decoration: none;
+    color: white;
+    transition: 0.5s;
+}
+
+.home:hover{
+    color: #D4A97D;
+    transition: 0.5s;
+    border-bottom: 2px solid #D4A97D;
+}
+
