@@ -2,17 +2,22 @@ const NotaFiscal = require("../../models/NotaFiscal");
 
 async function total() {
   const resultado = await NotaFiscal.aggregate([
-    { $match: { status: "EMITIDA" } },
+    {
+      $match: {
+        status: "EMITIDA",
+        valorTotal: { $exists: true, $ne: null }
+      }
+    },
     {
       $group: {
         _id: null,
-        totalFaturado: { $sum: "$valorTotal" }
+        total: { $sum: "$valorTotal" }
       }
     }
   ]);
 
-  // Se não houver notas, retorna 0
-  return resultado.length > 0 ? resultado[0].totalFaturado : 0;
+  return resultado.length > 0 ? resultado[0].total : 0;
 }
 
 module.exports = { total };
+

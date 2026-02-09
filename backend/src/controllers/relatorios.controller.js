@@ -1,8 +1,11 @@
+
 const faturamentoService = require("../services/relatorios/faturamento.service");
 const porClienteService = require("../services/relatorios/porCliente.service");
 const statusService = require("../services/relatorios/status.service");
 const mensalService = require("../services/relatorios/mensal.service");
-const totalService = require("../services/relatorios/total");
+const totalService = require("../services/relatorios/total.service");
+const totalClientesService = require("../services/relatorios/totalClientes.service");
+const dashboardService = require("../services/relatorios/dashboard.service");
 
 
 async function faturamento(req, res) {
@@ -42,16 +45,51 @@ async function mensal(req, res) {
 }
 
 
-async function totalClientes(req, res, next) {
+async function totalClientes(req, res) {
   try {
     const total = await totalService.total();
 
     return res.status(200).json({
       success: true,
-      total,
+      total: total ?? 0
     });
   } catch (error) {
-    next(error);
+    console.error("Erro ao obter total de clientes:", error);
+    return res.status(400).json({
+      success: false,
+      message: "Erro ao carregar total do dashboard"
+    });
+  }
+}
+
+async function totalClientes(req, res) {
+  try {
+    const total = await totalClientesService.totalClientes(); 
+
+    return res.status(200).json({
+      success: true,
+      total
+    });
+  }catch (error) {
+    console.error(error);
+    return res.status(400).json({
+      success: false,
+      message: "Erro ao carregar total de clientes"
+    });
+  }
+}
+
+
+async function dashboard(req, res) {
+  try{
+    const resumo = await dashboardService.rusumoDashboard();
+    return res.status(200).json(resumo);
+  }catch (error) {
+    console.error(error);
+    return res.status(400).json({
+      success: false,
+      message: "Erro ao carregar dados do dashboard"
+    });
   }
 }
 
@@ -65,5 +103,6 @@ module.exports = {
   porCliente,
   status,
   mensal,
-  totalClientes
+  totalClientes,
+  dashboard
 };

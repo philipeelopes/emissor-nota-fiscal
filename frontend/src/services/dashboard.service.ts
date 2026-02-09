@@ -9,3 +9,13 @@ export async function buscarTotalClientes() {
   const response = await api.get("/relatorios/total");
   return response.data.total;
 }
+
+export async function buscarDashboard() {
+  const response = await api.get("/relatorios/dashboard");
+  return{
+    totalNotas: response.data.totalNotas,
+    notasCanceladas: response.data.notasCanceladas,
+    valorEmitido: response.data.valorEmitido, 
+    totalClientes: response.data.totalClientes
+  };
+}
