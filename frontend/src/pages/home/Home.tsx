@@ -1,34 +1,71 @@
-
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { buscarResumoDashboard, buscarTotalClientes } from "../../services/dashboard.service";
 import styles from "./Home.module.css";
 
 
-
 export default function Home() {
-    return (
-        <div className={styles.container}>
-            <h1 className={styles.title}>Bem-vindo ao Emissor de Nota Fiscal</h1>
+  const [dados, setDados] = useState({
+    totalNotas: 0,
+    notasCanceladas: 0,
+    valorTotal: 0,
+    totalClientes: 0
+  });
 
-            <p className={styles.subtitle}>
-                Gerencie seus clientes, emita notas fiscais e acompanhe seus resultados.
-            </p>
+  useEffect(() => {
+    async function carregarDashboard() {
+      try {
+        const resumo = await buscarResumoDashboard();
+        const totalClientes = await buscarTotalClientes();
 
-            <div className={styles.cards}>
-                <div className={styles.card}>
-                    <h3>Clientes</h3>
-                    <p>Cadastre e gerencie seus clientes</p>
-                </div>
+        setDados({
+          totalNotas: resumo.totalNotas,
+          notasCanceladas: resumo.notasCanceladas,
+          valorTotal: resumo.valorTotal,
+          totalClientes
+        });
+      } catch {
+        alert("Erro ao carregar dashboard");
+      }
+    }
 
-                <div className={styles.card}>
-                    <h3>Notas Fiscais</h3>
-                    <p>Emita, visualize e cancele notas</p>
-                </div>
+    carregarDashboard();
+  }, []);
 
-                <div className={styles.card}>
-                    <h3>Relatórios</h3>
-                    <p>Acompanhe faturamento e status</p>
-                </div>
-            </div>
+  return (
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1>Dashboard</h1>
+        <p>Visão geral do emissor de notas</p>
+      </div>
+
+      <div className={styles.cards}>
+        <Link to="/notas" className={styles.card}>
+          <div className={styles.icon}>📄</div>
+          <h3>{dados.totalNotas}</h3>
+          <p>Notas emitidas</p>
+        </Link>
+
+        <div className={styles.card}>
+          <div className={styles.icon}>❌</div>
+          <h3>{dados.notasCanceladas}</h3>
+          <p>Notas canceladas</p>
         </div>
-    );
-}
 
+        <div className={styles.card}>
+          <div className={styles.icon}>💰</div>
+          <h3>
+            R$ {dados.valorTotal.toFixed(2)}
+          </h3>
+          <p>Valor total emitido</p>
+        </div>
+
+        <Link to="/clientes" className={styles.card}>
+          <div className={styles.icon}>👥</div>
+          <h3>{dados.totalClientes}</h3>
+          <p>Clientes cadastrados</p>
+        </Link>
+      </div>
+    </div>
+  );
+}

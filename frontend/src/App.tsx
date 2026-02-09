@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
+import  Home  from "./pages/home/Home";
 import NotasPage from "./pages/notas/NotasPage";
 import Header from "./components/Header";
 import Container from "./components/Container";
 import { ClientesPage } from "./pages/clientes/ClientesPage";
 import NotaDetalhePage from "./pages/notas/NotaDetalhePage";
 import Relatorio from "./pages/relatorios/Relatorio";
-import  Home  from "./pages/home/Home";
 
 import './App.css';
 

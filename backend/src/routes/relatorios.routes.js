@@ -7,6 +7,8 @@ router.get("/faturamento", relatoriosController.faturamento);
 router.get("/por-cliente", relatoriosController.porCliente);
 router.get("/status", relatoriosController.status);
 router.get("/mensal", relatoriosController.mensal);
+router.get("/total", relatoriosController.totalClientes);
+
 
 
 module.exports = router;

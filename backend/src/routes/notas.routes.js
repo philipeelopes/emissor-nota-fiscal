@@ -91,6 +91,12 @@ router.get("/", notasController.listar);
 
 
 
+
+router.get("/dashboard/resumo", notasController.resumoDashboard);
+
+
+
+
 /**
  * @swagger
  * /notas/{id}:

@@ -83,11 +83,39 @@ function naoPermitirDelete(req, res) {
   });
 }
 
+
+
+async function resumoDashboard(req, res) {
+  try{
+    const totalNotas = await NotaFiscal.countDocuments();
+    const notasCanceladas = await NotaFiscal.countDocuments({ status: "cancelada" });
+
+    const totalValor = await NotaFiscal.aggregate([
+      { $match: { status: "CANCELADA" } },
+      { $group: { _id: null, total: { $sum: "$valorTotal" } } }
+    ]);
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        totalNotas,
+        notasCanceladas,
+        valorTotal: totalValor[0]?.total || 0
+      }
+    });
+  }catch(err){
+    next(err);
+  }
+}
+
+
+
 module.exports = {
   criar,
   listar,
   buscarPorId,
   atualizar,
   cancelar,
-  naoPermitirDelete
+  naoPermitirDelete,
+  resumoDashboard
 };
