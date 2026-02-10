@@ -19,3 +19,8 @@ export async function buscarDashboard() {
     totalClientes: response.data.totalClientes
   };
 }
+
+export async function buscarFaturamentoMensal() {
+  const response = await api.get("/relatorios/mensal")
+  return response.data;
+}

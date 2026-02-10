@@ -8,6 +8,7 @@ const totalClientesService = require("../services/relatorios/totalClientes.servi
 const dashboardService = require("../services/relatorios/dashboard.service");
 
 
+
 async function faturamento(req, res) {
   try {
     const resultado = await faturamentoService.faturamento(req.query);
@@ -37,10 +38,11 @@ async function status(req, res) {
 
 async function mensal(req, res) {
   try {
-    const resultado = await mensalService.mensal();
-    return res.json(resultado);
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
+   const dados = await mensalService.mensal();
+   return res.json(dados);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Erro ao obter dados mensais" });
   }
 }
 
@@ -92,6 +94,9 @@ async function dashboard(req, res) {
     });
   }
 }
+
+
+
 
 
 

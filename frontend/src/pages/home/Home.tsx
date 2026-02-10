@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {  buscarDashboard } from "../../services/dashboard.service";
+import { buscarDashboard } from "../../services/dashboard.service";
 import styles from "./Home.module.css";
+import FaturamentoMensalChart from "../../components/FaturamentoMensal";
 
 type DashboardDados = {
   totalNotas: number;
@@ -27,37 +28,51 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Dashboard</h1>
+        <h1>Bem vindo ao Emissor de Notas</h1>
+        <h2>Dashboard</h2>
         <p>Visão geral do emissor de notas</p>
       </div>
 
-      <div className={styles.cards}>
-        <Link to="/notas" className={styles.card}>
-          <div className={styles.icon}>📄</div>
-          <h3>{dados.totalNotas}</h3>
-          <p>Notas emitidas</p>
-        </Link>
+      <div className={styles.dashboard}>
 
-        <div className={styles.card}>
-          <div className={styles.icon}>❌</div>
-          <h3>{dados.notasCanceladas}</h3>
-          <p>Notas canceladas</p>
+        <div className={styles.cards}>
+          <Link to="/notas" className={styles.card}>
+            <div className={styles.icon}>📄</div>
+            <h3>{dados.totalNotas}</h3>
+            <p>Notas emitidas</p>
+          </Link>
+
+          <div className={styles.card}>
+            <div className={styles.icon}>❌</div>
+            <h3>{dados.notasCanceladas}</h3>
+            <p>Notas canceladas</p>
+          </div>
+
+          <div className={styles.card}>
+            <div className={styles.icon}>💰</div>
+            <h3>
+              R$ {(dados.valorEmitido ?? 0).toFixed(2)}
+            </h3>
+            <p>Valor total emitido</p>
+          </div>
+
+          <Link to="/clientes" className={styles.card}>
+            <div className={styles.icon}>👥</div>
+            <h3>{dados.totalClientes}</h3>
+            <p>Clientes cadastrados</p>
+          </Link>
         </div>
 
-        <div className={styles.card}>
-          <div className={styles.icon}>💰</div>
-          <h3>
-            R$ {(dados.valorEmitido ?? 0).toFixed(2)}
-          </h3>
-          <p>Valor total emitido</p>
+        <div className={styles.grafico}>
+          <FaturamentoMensalChart />
         </div>
 
-        <Link to="/clientes" className={styles.card}>
-          <div className={styles.icon}>👥</div>
-          <h3>{dados.totalClientes}</h3>
-          <p>Clientes cadastrados</p>
-        </Link>
       </div>
+
     </div>
+
+
+
+
   );
 }
