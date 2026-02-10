@@ -4,13 +4,19 @@
     gap: 1rem;
 }
 
+
 .title {
     font-size: 1.5rem;
     font-weight: bold;
+     margin-left: 24px;
 }
 
 .empty {
     color: #64748b;
+}
+
+.table{
+  margin-left: 24px;
 }
 
 table th {

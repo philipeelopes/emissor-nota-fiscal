@@ -1,11 +1,12 @@
 import {
+    AreaChart,
+    Area,
     LineChart,
     Line,
     XAxis,
     YAxis,
     CartesianGrid,
     Tooltip,
-    AreaChart,
     ResponsiveContainer
 } from "recharts";
 import { useEffect, useState } from "react";
@@ -19,18 +20,39 @@ type FaturamentoMensal = {
 
 export default function FaturamentoMensalChart() {
     const [dados, setDados] = useState<FaturamentoMensal[]>([]);
+    const anoAtual = new Date().getFullYear();
+    const [ano, setAno] = useState<number>(anoAtual);
+
 
     useEffect(() => {
-        buscarFaturamentoMensal().then(setDados);
-    }, []);
+        buscarFaturamentoMensal(ano)
+            .then(setDados)
+            .catch(() => console.error("Erro ao carregar faturamento"));
+    }, [ano]);
+
 
     return (
         <div className={styles.container}>
             <h3 className={styles.titulo}>Faturamento mensal</h3>
 
-            <ResponsiveContainer>
+            <div className={styles.filtro}>
+                <label> Ano </label>
+                <select value={ano}
+                    onChange={(e) => setAno(Number(e.target.value))}
+                >
+                    <option value={2024}>2024</option>
+                    <option value={2025}>2025</option>
+                    <option value={2026}>2026</option>
+                </select>
+            </div>
 
-              
+            {dados.length === 0 ? (
+                <p className={styles.vazio}>Nenhum faturamento encontrado para este ano</p>
+            ) : (
+// margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
+                <ResponsiveContainer>
+
+
 
                     <LineChart data={dados}
                         margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
@@ -65,8 +87,9 @@ export default function FaturamentoMensalChart() {
                             activeDot={{ r: 7 }}
                         />
                     </LineChart>
-                    
-            </ResponsiveContainer>
+
+                </ResponsiveContainer>
+            )}
         </div>
     );
 }

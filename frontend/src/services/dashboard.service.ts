@@ -20,7 +20,9 @@ export async function buscarDashboard() {
   };
 }
 
-export async function buscarFaturamentoMensal() {
-  const response = await api.get("/relatorios/mensal")
+export async function buscarFaturamentoMensal(ano: number) {
+  const response = await api.get(`/relatorios/mensal?ano=${ano}`);
   return response.data;
 }
+
+
