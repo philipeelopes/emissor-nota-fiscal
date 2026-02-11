@@ -26,3 +26,12 @@ export async function buscarFaturamentoMensal(ano: number) {
 }
 
 
+export async function comparacaoFaturamentoAnual(
+  anoInicial: number,
+  anoFinal: number
+) {
+  const response = await api.get(
+    `/relatorios/comparacao?anoInicial=${anoInicial}&anoFinal=${anoFinal}`
+  );
+  return response.data;
+}

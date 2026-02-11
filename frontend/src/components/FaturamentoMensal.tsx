@@ -50,7 +50,11 @@ export default function FaturamentoMensalChart() {
                 <p className={styles.vazio}>Nenhum faturamento encontrado para este ano</p>
             ) : (
 // margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
-                <ResponsiveContainer>
+
+                <ResponsiveContainer
+                width="100%"
+                height={300}
+            >
 
 
 
@@ -81,7 +85,7 @@ export default function FaturamentoMensalChart() {
                         <Line
                             type="monotone"
                             dataKey="total"
-                            stroke="#2563eb"
+                            stroke="#3a73ee"
                             strokeWidth={3}
                             dot={{ r: 5 }}
                             activeDot={{ r: 7 }}

@@ -95,6 +95,17 @@ async function dashboard(req, res) {
   }
 }
 
+async function comparacaoFaturamento(req, res) {
+  try {
+    const { anoInicial, anoFinal } = req.query;
+    const dados = await dashboardService.comparacaoFaturamento(Number(anoInicial), Number(anoFinal));
+    return res.json(dados);
+  }catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Erro ao obter comparação de faturamento" });
+  }
+}
+
 
 
 
@@ -109,5 +120,6 @@ module.exports = {
   status,
   mensal,
   totalClientes,
-  dashboard
+  dashboard,
+  comparacaoFaturamento
 };
