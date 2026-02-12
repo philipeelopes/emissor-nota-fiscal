@@ -25,7 +25,7 @@ export default function ComparacaoFaturamentoChart() {
     useEffect(() => {
         comparacaoFaturamentoAnual(anoAtual - 1, anoAtual)
             .then((res) => {
-                console.log("📊 dados comparação:", res);
+                console.log(" dados comparação:", res);
                 setDados(res);
             })
             .catch(() => console.error("Erro ao carregar comparação"));
@@ -36,13 +36,19 @@ export default function ComparacaoFaturamentoChart() {
                 Comparação de Faturamento ({anoAtual - 1} x {anoAtual})
             </h3>
 
-            <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={dados}>
+            <ResponsiveContainer width="100%" height={360}>
+                <LineChart data={dados}
+                 margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
+                >
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="mes" />
+                    <XAxis dataKey="mes" 
+                    
+                    />
                     <YAxis
                         tickFormatter={(v) =>
-                            `R$ ${Number(v).toLocaleString("pt-BR")}`
+                            `R$ ${Number(v).toLocaleString("pt-BR", {
+                                notation: "compact",
+                            })}`
                         }
                     />
                     <Tooltip

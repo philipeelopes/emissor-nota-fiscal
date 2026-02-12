@@ -6,6 +6,9 @@ const mensalService = require("../services/relatorios/mensal.service");
 const totalService = require("../services/relatorios/total.service");
 const totalClientesService = require("../services/relatorios/totalClientes.service");
 const dashboardService = require("../services/relatorios/dashboard.service");
+const comparacaoService = require("../services/relatorios/relatorios.service");
+
+
 
 
 
@@ -95,17 +98,23 @@ async function dashboard(req, res) {
   }
 }
 
+
 async function comparacaoFaturamento(req, res) {
   try {
-    const { anoInicial, anoFinal } = req.query;
-    const dados = await dashboardService.comparacaoFaturamento(Number(anoInicial), Number(anoFinal));
+    const anoInicial = Number(req.query.anoInicial);
+    const anoFinal = Number(req.query.anoFinal);
+
+    const dados = await comparacaoService.comparacaoFaturamento(
+      anoInicial,
+      anoFinal
+    );
+
     return res.json(dados);
-  }catch (error) {
+  } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao obter comparação de faturamento" });
   }
 }
-
 
 
 

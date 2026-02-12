@@ -6,8 +6,8 @@ async function comparacaoFaturamento(anoInicial, anoFinal) {
       $match: {
         status: "EMITIDA",
         dataEmissao: {
-          $gte: new Date(`${anoInicial}-01-01`),
-          $lte: new Date(`${anoFinal}-12-31`)
+          $gte: new Date(anoInicial, 0, 1),
+          $lte: new Date(anoFinal, 11, 31, 23, 59, 59)
         }
       }
     },

@@ -49,7 +49,7 @@ export default function FaturamentoMensalChart() {
             {dados.length === 0 ? (
                 <p className={styles.vazio}>Nenhum faturamento encontrado para este ano</p>
             ) : (
-// margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
+
 
                 <ResponsiveContainer
                 width="100%"
@@ -68,7 +68,7 @@ export default function FaturamentoMensalChart() {
                         <YAxis
                             tickFormatter={(value) =>
                                 `R$ ${Number(value).toLocaleString("pt-BR", {
-                                    minimumFractionDigits: 2
+                                    notation: "compact",
                                 })}`
                             }
                         />

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { buscarDashboard } from "../../services/dashboard.service";
 import styles from "./Home.module.css";
-import FaturamentoMensalChart from "../../components/FaturamentoMensal";  
+import FaturamentoMensalChart from "../../components/FaturamentoMensal";
 import ComparacaoFaturamentoChart from "../../components/ComparacaoFaturamento";
 
 type DashboardDados = {
@@ -13,6 +13,8 @@ type DashboardDados = {
 }
 
 export default function Home() {
+  const [graficoAtivo, setGraficoAtivo] = useState<"mensal" | "comparacao">("mensal");
+
   const [dados, setDados] = useState<DashboardDados>({
     totalNotas: 0,
     notasCanceladas: 0,
@@ -62,18 +64,33 @@ export default function Home() {
             <h3>{dados.totalClientes}</h3>
             <p>Clientes cadastrados</p>
           </Link>
+
         </div>
+
 
         <div className={styles.grafico}>
-          <FaturamentoMensalChart />
-           <ComparacaoFaturamentoChart/>
+          <div className={styles.graficoToggle}>
+            <button
+              className={graficoAtivo === "mensal" ? styles.ativo : ""}
+              onClick={() => setGraficoAtivo("mensal")}
+            >
+              📈 Faturamento Mensal
+            </button>
+
+            <button
+              className={graficoAtivo === "comparacao" ? styles.ativo : ""}
+              onClick={() => setGraficoAtivo("comparacao")}
+            >
+              📊 Comparação Anual
+            </button>
+          </div>
+          {graficoAtivo === "mensal" && <FaturamentoMensalChart />}
+          {graficoAtivo === "comparacao" && <ComparacaoFaturamentoChart />}
         </div>
-
-       
-
       </div>
-
     </div>
+
+
 
 
 
