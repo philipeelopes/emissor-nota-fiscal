@@ -1,6 +1,4 @@
 import {
-    AreaChart,
-    Area,
     LineChart,
     Line,
     XAxis,
