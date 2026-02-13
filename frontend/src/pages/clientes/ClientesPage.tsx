@@ -5,7 +5,7 @@ import type { Cliente } from "../../types/Cliente";
 import styles from "./ClientesPage.module.css";
 
 
-export function ClientesPage() {
+export default function ClientesPage() {
     const [clientes, setClientes] = useState<Cliente[]>([]);
     const [loading, setLoading] = useState(true);
 

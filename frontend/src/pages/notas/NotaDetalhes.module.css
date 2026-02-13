@@ -4,12 +4,16 @@
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
   padding: 32px;
   margin: 32px;
+ 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.table {
+.table { 
   width: 100%;
   border-collapse: collapse;
-  margin: 16px;
+  margin: 16px 0;
 }
 
 .table th,
@@ -24,6 +28,7 @@
 }
 
 .cancelButton {
+  width: 150px;
   background-color: #e74c3c;
   color: white;
   border: none;

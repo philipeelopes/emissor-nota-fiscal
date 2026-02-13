@@ -101,7 +101,7 @@ export default function DetalhesNota() {
 
      <h3>Total da Nota: R$ {totalCalculado.toFixed(2)}</h3>
 
-     {nota.status !== "CANCELADA" && (
+      { nota.status !== "CANCELADA" && (
       <button className={styles.cancelButton} onClick={handleCancelar}>
         Cancelar Nota
       </button>

@@ -1,16 +1,27 @@
 
 .header{
-    padding: 2rem;
+    padding: 4rem;
     background-color: #091519 ;
     color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+  
+
 }
 
 .menu{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    gap: 2rem;
+
     display: flex;
-    align-items: center;
-    justify-content: left;
     gap: 60px;
+    align-items: center;
+
+   
+   
 }
 
 .nota, .clientes, .relatorios{
