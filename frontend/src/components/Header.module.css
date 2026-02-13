@@ -1,15 +1,16 @@
 
 .header{
-    padding: 4rem;
+    padding: 4rem 0 1rem 4rem;
     background-color: #091519 ;
     color: #fff;
+    height: 120px;
+
 
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
     
-  
-
+    
 }
 
 .menu{
@@ -19,6 +20,8 @@
     display: flex;
     gap: 60px;
     align-items: center;
+    
+    
 
    
    
@@ -53,6 +56,14 @@
 
 }
 
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+
+
 .home{
     font-weight: bolder;
     text-decoration: none;
@@ -66,3 +77,8 @@
     border-bottom: 2px solid #D4A97D;
 }
 
+
+img{
+    width: 200px;
+    contain: cover;
+}
