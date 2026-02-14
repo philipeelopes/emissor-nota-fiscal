@@ -44,4 +44,6 @@ const NotaFiscalSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
+
+
 module.exports = mongoose.model("NotaFiscal", NotaFiscalSchema);

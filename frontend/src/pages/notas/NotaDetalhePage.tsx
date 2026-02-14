@@ -4,52 +4,41 @@ import { buscarNotaPorId } from "../../services/notas.service";
 import type { NotaFiscal } from "../../types/NotaFiscal";
 import styles from "./NotaDetalhes.module.css";
 import { CancelarNota } from "../../services/notas.service";
+import { buscarEmpresa } from "../../services/empresa.service";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Danfe from "../../components/danfe/Danfe";
 
-const notaFake = {
-  numero: "000123",
-  data: "12/02/2026",
-  prestador: {
-    nome: "Empresa Exemplo LTDA",
-    cnpj: "12.345.678/0001-90",
-    endereco: "Rua Exemplo, 123"
-  },
-  cliente: {
-    nome: "João da Silva",
-    documento: "123.456.789-00",
-    endereco: "Av Brasil, 456"
-  },
-  servicos: [
-    { descricao: "Desenvolvimento de sistema", quantidade: 1, valor: 1500 }
-  ],
-  total: 1500,
-  iss: 75
-};
+
 
 export default function DetalhesNota() {
   const { id } = useParams<{ id: string }>();
   const [nota, setNota] = useState<NotaFiscal | null>(null);
   const [loading, setLoading] = useState(true);
+  const [empresa, setEmpresa] = useState<any>(null)
   const [mostrarDanfe, setMostrarDanfe] = useState(false);
 
   useEffect(() => {
     if (!id) return;
 
-    buscarNotaPorId(id)
-      .then((data) =>
+    Promise.all([
+      buscarNotaPorId(id),
+      buscarEmpresa()
+    ])
+      .then(([notaData, empresaData]) => {
         setNota({
-          ...data,
-          itens: data.itens ?? [],
+          ...notaData,
+          itens: notaData.itens ?? [],
         })
-      )
+        setEmpresa(empresaData);
+      })
       .catch(() => alert("Erro ao carregar nota"))
       .finally(() => setLoading(false));
   }, [id]);
 
   if (loading) return <p>Carregando...</p>;
   if (!nota) return <p>Nota não encontrada</p>;
+  if (!empresa) return <p>Empresa não encontrada</p>
 
 
   const totalCalculado =
@@ -92,6 +81,19 @@ export default function DetalhesNota() {
       pdf.save("danfe.pdf")
     })
   }
+
+
+    const aliquotaISS = 0.05; // 5% exemplo
+    const issCalculado = totalCalculado * aliquotaISS
+    const notaDanfe = nota && empresa ? {
+
+    numero: nota.numero,
+    dataEmissao: nota.dataEmissao,
+    prestador: empresa,
+    cliente: nota.cliente,
+    itens: nota.itens,
+    iss: issCalculado
+  } : null;
 
 
   return (
@@ -158,10 +160,10 @@ export default function DetalhesNota() {
           mostrarDanfe && (
             <div className={styles.overlay}>
               <div className={styles.modal}>
-                <Danfe nota={notaFake} />
+                {notaDanfe && <Danfe nota={notaDanfe}/>}
                 <div className={styles.action}>
                   <button className={styles.fechar} onClick={() => setMostrarDanfe(false)}>Fechar</button>
-                   <button className={styles.gerar} onClick={() => gerarPDF()}>Gerar PDF</button>
+                  <button className={styles.gerar} onClick={() => gerarPDF()}>Gerar PDF</button>
                 </div>
               </div>
             </div>

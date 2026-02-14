@@ -3,9 +3,11 @@ const cors = require("cors");
 const clientesRoutes = require("./routes/clientes.routes");
 const notasRoutes = require("./routes/notas.routes")
 const relatoriosRoutes = require("./routes/relatorios.routes");
+const empresaRoutes = require("./routes/empresa")
 const errorMiddleware = require("./middlewares/error.middleware");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./docs/swagger");
+
 
 
 const app = express();
@@ -28,6 +30,8 @@ app.get("/", (req, res) => {
     message: "API Emissor de Nota Fiscal rodando"
   });
 });
+
+app.use(empresaRoutes)
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
