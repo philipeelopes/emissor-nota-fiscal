@@ -1,0 +1,66 @@
+.danfe{
+    background: white;
+    color: black;
+    pad: 32px;
+    max-width: 900px;
+    margin: auto;
+    border: 1px solid black;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+}
+
+.header h1{
+    margin: 0;
+}
+
+.infoNota p{
+    margin: 0;
+    text-align: right;
+}
+
+.bloco{
+    margin-top: 20px;
+}
+
+.bloco h2{
+    font: 14px;
+    background: #eee;
+    padding: 6px;
+    border: 1px solid #ccc;
+}
+
+.tabela{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabela th,
+.tabela td{
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.totais{
+    margin-top: 20px;
+    text-align: right;
+}
+
+.totalFinal{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer{
+    margin-top: 30px;
+    text-align: center;
+    font-size: 12px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
