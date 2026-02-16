@@ -8,6 +8,8 @@ import { buscarEmpresa } from "../../services/empresa.service";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Danfe from "../../components/danfe/Danfe";
+import type { NotaDanfe } from "../../types/NotaDanfe";
+
 
 
 
@@ -83,17 +85,28 @@ export default function DetalhesNota() {
   }
 
 
-    const aliquotaISS = 0.05; // 5% exemplo
-    const issCalculado = totalCalculado * aliquotaISS
-    const notaDanfe = nota && empresa ? {
-
-    numero: nota.numero,
+  const aliquotaISS = 0.05; // 5% exemplo
+  const issCalculado = totalCalculado * aliquotaISS
+  const notaDanfe: NotaDanfe = {
+    numero: nota.numero.toString(),
     dataEmissao: nota.dataEmissao,
-    prestador: empresa,
-    cliente: nota.cliente,
-    itens: nota.itens,
+    prestador: {
+      nome: empresa.nomeFantasia,
+      cnpj: empresa.cnpj,
+      endereco: empresa.endereco
+    },
+    cliente: {
+      nome: nota.cliente.nome,
+      documento: nota.cliente.documento,
+      endereco: nota.cliente.endereco
+    },
+    itens: nota.itens.map(item => ({
+      descricao: item.descricao,
+      quantidade: Number(item.quantidade),
+      valorUnitario: Number(item.valorUnitario)
+    })),
     iss: issCalculado
-  } : null;
+  };
 
 
   return (
@@ -103,9 +116,7 @@ export default function DetalhesNota() {
 
       <p>
         <strong>Cliente:</strong>{" "}
-        {nota?.cliente && typeof nota.cliente === "object"
-          ? nota.cliente.nome
-          : "Cliente não carregado"}
+        {nota?.cliente?.nome ?? "Cliente não carregado"}
       </p>
       <p><strong>Status:</strong> {nota.status}</p>
       <p><strong>Tipo:</strong> {nota.tipo}</p>
@@ -160,7 +171,7 @@ export default function DetalhesNota() {
           mostrarDanfe && (
             <div className={styles.overlay}>
               <div className={styles.modal}>
-                {notaDanfe && <Danfe nota={notaDanfe}/>}
+                <Danfe nota={notaDanfe} />
                 <div className={styles.action}>
                   <button className={styles.fechar} onClick={() => setMostrarDanfe(false)}>Fechar</button>
                   <button className={styles.gerar} onClick={() => gerarPDF()}>Gerar PDF</button>

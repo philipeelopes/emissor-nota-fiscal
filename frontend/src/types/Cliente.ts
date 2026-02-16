@@ -4,4 +4,5 @@ export interface Cliente {
     email: string;
     documento: string;
     telefone?: string;
+    endereco?: String;
 }

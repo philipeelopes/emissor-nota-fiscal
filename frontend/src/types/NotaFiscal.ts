@@ -1,6 +1,7 @@
 
 
 export type Cliente = {
+  endereco: string | undefined;
   _id: string;
   nome: string;
   email: string;
@@ -23,4 +24,5 @@ export type NotaFiscal = {
   valorTotal: number;
   status: "EMITIDA" | "CANCELADA";
   dataEmissao: string;
+ 
 };

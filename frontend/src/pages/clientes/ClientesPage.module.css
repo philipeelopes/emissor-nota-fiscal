@@ -18,3 +18,18 @@
   text-align: left;
  
 }
+
+.btnExcluir{
+    border: none;
+    width: 80px;
+    margin: 10px;
+    background-image: linear-gradient(#E6CA7F, #D4AA7D);
+    color: black;
+    border-radius: 40px;
+    transition: 0.4s;
+}
+
+.btnExcluir:hover{
+    transform: scale(1.05);
+    transition: 0.4s;
+}

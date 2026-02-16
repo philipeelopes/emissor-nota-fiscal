@@ -1,14 +1,17 @@
 import styles from "./Danfe.module.css";
+import type { NotaDanfe } from "../../types/NotaDanfe";
 
 interface DanfeProps {
-  nota: any;
-}
+  nota: NotaDanfe;
+
+  };
+
 
 export default function Danfe({ nota }: DanfeProps) {
   // Garantias de segurança
-  const prestador = nota?.prestador ?? {};
+  const prestador = nota?.prestador ?? { nome: "", cnpj: "", endereco: "" };
   const cliente =
-    nota?.cliente && typeof nota.cliente === "object" ? nota.cliente : {};
+    nota?.cliente && typeof nota.cliente === "object" ? nota.cliente : { nome: "", documento: "", endereco: "" };
 
   const itens = Array.isArray(nota?.itens) ? nota.itens : [];
 

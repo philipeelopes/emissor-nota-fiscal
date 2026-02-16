@@ -36,19 +36,31 @@ async function criarNota({ cliente, tipo, itens, descricao }) {
   });
 }
 
+
 async function buscarNotaPorId(id) {
-  const nota = await NotaFiscal.findById(id)
-    .populate("cliente");
+  const nota = await NotaFiscal.findById(req.params.id)
+    .populate({
+      path: "cliente",
+      select: "nome email documento endereco"
+    });
 
   if (!nota) {
-    throw new Error("Nota fiscal não encontrada");
+    return res.status(404).json({ error: "Nota não encontrada" });
   }
 
-  return nota;
+  // 🔒 defesa extra
+  if (!nota.cliente) {
+    nota.cliente = {
+      nome: "Cliente removido",
+      email: "-",
+      documento: "-",
+      endereco: "-"
+    };
+  }
 }
 
-module.exports = {
-  criarNota, 
-  buscarNotaPorId,
-};
+  module.exports = {
+    criarNota,
+    buscarNotaPorId,
+  };
 

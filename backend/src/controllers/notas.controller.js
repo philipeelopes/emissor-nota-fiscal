@@ -15,7 +15,6 @@ async function criar(req, res) {
   }
 }
 
-
 async function listar(req, res, next) {
   try {
     const resultado = await listarNotas(req.query);
@@ -86,7 +85,7 @@ function naoPermitirDelete(req, res) {
 
 
 async function resumoDashboard(req, res) {
-  try{
+  try {
     const totalNotas = await NotaFiscal.countDocuments();
     const notasCanceladas = await NotaFiscal.countDocuments({ status: "cancelada" });
 
@@ -103,7 +102,7 @@ async function resumoDashboard(req, res) {
         valorTotal: totalValor[0]?.total || 0
       }
     });
-  }catch(err){
+  } catch (err) {
     next(err);
   }
 }

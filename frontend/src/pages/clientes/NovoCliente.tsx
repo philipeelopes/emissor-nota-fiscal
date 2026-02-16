@@ -11,12 +11,13 @@ export function NovoCliente({ onClienteCriado}: NovoClienteProps) {
     const [nome, setNome] = useState("")
     const [email, setEmail] = useState("");
     const [documento, setDocumento] = useState("");
+    const [endereco, setEndereco] = useState("")
     const [loading, setLoading] = useState(false);
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        if(!nome || !email || !documento){
+        if(!nome || !email || !documento || !endereco){
             alert("Preencha todos os campos")
             return;
         }
@@ -28,6 +29,7 @@ export function NovoCliente({ onClienteCriado}: NovoClienteProps) {
                 nome,
                 email,
                 documento,
+                endereco,
             });
 
 
@@ -39,6 +41,7 @@ export function NovoCliente({ onClienteCriado}: NovoClienteProps) {
             setNome("");
             setEmail("");
             setDocumento("");
+            setEndereco("");
         }catch (error) {
             console.error(error);
             alert("Erro ao cadastrar cliente");
@@ -70,6 +73,13 @@ export function NovoCliente({ onClienteCriado}: NovoClienteProps) {
             placeholder="Documento"
             value={documento}
             onChange={(e) => setDocumento(e.target.value)} 
+            />
+
+            <input 
+            type="text" 
+            placeholder="Endereço" 
+            value={endereco} 
+            onChange={(e) => setEndereco(e.target.value)}
             />
 
             <button type="submit" disabled={loading}>

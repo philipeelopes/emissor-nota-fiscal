@@ -12,3 +12,10 @@ export async function criarCliente(
     const response = await api.post("/clientes", cliente);
     return response.data;
 }
+
+
+export async function deletarCliente(id: string) {
+    const response = await api.delete(`/clientes/${id}`);
+    return response.data;
+}
+    

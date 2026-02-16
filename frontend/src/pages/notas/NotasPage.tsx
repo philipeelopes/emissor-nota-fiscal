@@ -42,7 +42,7 @@ export default function NotasPage() {
               >
                 <td >
                   <Link className={styles.cliente} to={`/notas/${nota._id}`}>
-                    {nota.cliente.nome}
+                    {nota.cliente?.nome ?? "Cliente não iformado"}
                   </Link>
                 </td>
                 <td>

@@ -35,10 +35,18 @@ async function listarNotas(query) {
   const sort = {};
   sort[sortBy] = order === "asc" ? 1 : -1;
 
-  const total = await NotaFiscal.countDocuments(filtros);
+  const filtroComCliente = {
+    ...filtros,
+    cliente: { $ne: null }
+  }
 
-  const notas = await NotaFiscal.find(filtros)
-    .populate("cliente")
+  const total = await NotaFiscal.countDocuments(filtroComCliente);
+
+  const notas = await NotaFiscal.find(filtroComCliente)
+    .populate({
+      path: "cliente",
+      select: "nome email documento endereco"
+    })
     .sort(sort)
     .skip(skip)
     .limit(limitNumber);

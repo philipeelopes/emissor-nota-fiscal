@@ -13,6 +13,11 @@ const ClientSchema = new mongoose.Schema(
         email: String,
         telefone: String,
         endereco: String,
+
+        ativo:{
+            type: Boolean,
+            default: true
+        }
     },
     { timestamps: true }
 );

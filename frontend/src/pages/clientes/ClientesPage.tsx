@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { listarClientes } from "../../services/clientes.service";
+import { listarClientes, deletarCliente } from "../../services/clientes.service";
 import { NovoCliente } from "../clientes/NovoCliente"
 import type { Cliente } from "../../types/Cliente";
 import styles from "./ClientesPage.module.css";
@@ -8,6 +8,7 @@ import styles from "./ClientesPage.module.css";
 export default function ClientesPage() {
     const [clientes, setClientes] = useState<Cliente[]>([]);
     const [loading, setLoading] = useState(true);
+    
 
     
         async function carregarClientes() {
@@ -24,6 +25,25 @@ export default function ClientesPage() {
             useEffect(() => {
                  carregarClientes();
             }, []);
+
+            async function handleExcluirCliente(id: string) {
+                const confirmação = window.confirm(" Tem certeza de deseja excluir este Cliente? ")
+                
+                if (!confirmação) return;
+
+                try{
+                    await deletarCliente(id);
+                    carregarClientes();
+                }catch(error){
+                    console.error("Erro ao excluir cliente", error);
+                    alert("Erro ao excluir cliente");
+                }
+                
+            }
+
+        
+
+           
        
     
 
@@ -44,6 +64,8 @@ export default function ClientesPage() {
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Documento</th>
+                        <th>Endereço</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +74,16 @@ export default function ClientesPage() {
                             <td>{cliente.nome}</td>
                             <td>{cliente.email}</td>
                             <td>{cliente.documento}</td>
+                            <td>{cliente.endereco}</td>
+                            
+                        
+                            <button className={styles.btnExcluir}
+                            onClick={() => handleExcluirCliente(cliente._id)}
+                            >
+                            Excluir
+                            </button>
+                            
+                            
                         </tr>
                     ))}
                 </tbody>
