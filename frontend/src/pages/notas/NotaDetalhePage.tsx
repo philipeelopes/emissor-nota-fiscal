@@ -85,27 +85,45 @@ export default function DetalhesNota() {
   }
 
 
-  const aliquotaISS = 0.05; // 5% exemplo
-  const issCalculado = totalCalculado * aliquotaISS
+  const aliquotaISS = 0.05; // 5%
+  const baseCalculo = totalCalculado;
+  const issCalculado = baseCalculo * aliquotaISS;
   const notaDanfe: NotaDanfe = {
     numero: nota.numero.toString(),
     dataEmissao: nota.dataEmissao,
+
+    competencia: new Date(nota.dataEmissao).toLocaleDateString("pt-BR", {
+      month: "2-digit",
+      year: "numeric"
+    }),
+
+    municipioIncidencia: empresa.municipio,
+    naturezaOperacao: "Prestação de Serviços",
+    discriminacao: "Prestação de serviços conforme itens descritos nesta nota fiscal.",
+
     prestador: {
       nome: empresa.nomeFantasia,
       cnpj: empresa.cnpj,
       endereco: empresa.endereco
     },
+
     cliente: {
       nome: nota.cliente.nome,
       documento: nota.cliente.documento,
-      endereco: nota.cliente.endereco
+      endereco: nota.cliente.endereco || ""
     },
+
     itens: nota.itens.map(item => ({
       descricao: item.descricao,
       quantidade: Number(item.quantidade),
       valorUnitario: Number(item.valorUnitario)
     })),
-    iss: issCalculado
+
+    baseCalculo,
+    aliquotaISS,
+    iss: issCalculado,
+    issRetido: false,
+    totalServicos: undefined
   };
 
 

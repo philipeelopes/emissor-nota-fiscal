@@ -4,7 +4,7 @@ import type { NotaDanfe } from "../../types/NotaDanfe";
 interface DanfeProps {
   nota: NotaDanfe;
 
-  };
+};
 
 
 export default function Danfe({ nota }: DanfeProps) {
@@ -23,7 +23,7 @@ export default function Danfe({ nota }: DanfeProps) {
       0
     ) || 0;
 
-  const iss = nota?.iss ?? 0;
+ 
 
   return (
     <div className={styles.danfe} id="danfe">
@@ -46,6 +46,12 @@ export default function Danfe({ nota }: DanfeProps) {
           </p>
         </div>
       </header>
+
+      <section className={styles.bloco}>
+        <p><strong>Competência:</strong> {nota.competencia}</p>
+        <p><strong>Município de Incidência:</strong> {nota.municipioIncidencia}</p>
+        <p><strong>Natureza da Operação:</strong> {nota.naturezaOperacao}</p>
+      </section>
 
       {/* Prestador */}
       <section className={styles.bloco}>
@@ -118,17 +124,37 @@ export default function Danfe({ nota }: DanfeProps) {
         </table>
       </section>
 
+      <section className={styles.bloco}>
+        <h2>Discriminação do Serviço</h2>
+        <p>{nota.discriminacao}</p>
+      </section>
+
       {/* Totais */}
       <section className={styles.totais}>
         <p>
-          <strong>Valor dos Serviços:</strong> R$ {total.toFixed(2)}
+          <strong>Base de Cálculo:</strong> R$ {nota.baseCalculo.toFixed(2)}
         </p>
+
         <p>
-          <strong>ISS:</strong> R$ {iss.toFixed(2)}
+          <strong>Alíquota ISS:</strong> {(nota.aliquotaISS * 100).toFixed(2)}%
         </p>
+
+        <p>
+          <strong>ISS Devido:</strong> R$ {nota.iss.toFixed(2)}
+        </p>
+
+        <p>
+          <strong>ISS Retido:</strong> {nota.issRetido ? "Sim" : "Não"}
+        </p>
+
         <p className={styles.totalFinal}>
-          <strong>Valor Líquido:</strong> R$ {(total - iss).toFixed(2)}
+          <strong>Valor Líquido:</strong> R$ {(nota.baseCalculo - nota.iss).toFixed(2)}
         </p>
+      </section>
+
+      <section className={styles.bloco}>
+        <h2>Discriminação do Serviço</h2>
+        <p>{total}</p>
       </section>
 
       {/* Rodapé */}
