@@ -6,7 +6,7 @@ export interface NotaDanfe {
   competencia: string; // MM/AAAA
   municipioIncidencia: string;
   naturezaOperacao: string;
-  discriminacao: string;
+  observacao?: string;
 
   prestador: {
     nome: string;

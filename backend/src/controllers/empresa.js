@@ -9,11 +9,11 @@ const Empresa = require("../models/empresa")
         if (!empresa) {
             empresa = await Empresa.create({
             razaoSocial: "Minha Empresa LTDA",
-            nomeFantasia: "Minha Empresa",
+            nomeFantasia: "Coral Vidros",
             cnpj: "12.345.678/0001-90",
-            inscricaoMunicipal: "123456",
+            inscricaoMunicipal: "88495-000",
             endereco: "Rua Central, 123",
-            municipio: "São Paulo",
+            municipio: "Garopaba",
             uf: "SP",
             telefone: "(11) 99999-9999",
             email: "contato@empresa.com"

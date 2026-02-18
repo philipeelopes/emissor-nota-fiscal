@@ -88,6 +88,9 @@ export default function DetalhesNota() {
   const aliquotaISS = 0.05; // 5%
   const baseCalculo = totalCalculado;
   const issCalculado = baseCalculo * aliquotaISS;
+
+  console.log("NOTA DO BACKEND:", nota);
+
   const notaDanfe: NotaDanfe = {
     numero: nota.numero.toString(),
     dataEmissao: nota.dataEmissao,
@@ -99,7 +102,7 @@ export default function DetalhesNota() {
 
     municipioIncidencia: empresa.municipio,
     naturezaOperacao: "Prestação de Serviços",
-    discriminacao: "Prestação de serviços conforme itens descritos nesta nota fiscal.",
+    observacao: nota.observacao,
 
     prestador: {
       nome: empresa.nomeFantasia,

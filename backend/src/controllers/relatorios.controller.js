@@ -14,6 +14,7 @@ const comparacaoService = require("../services/relatorios/relatorios.service");
 
 async function faturamento(req, res) {
   try {
+        console.log("Query recebida:", req.query);
     const resultado = await faturamentoService.faturamento(req.query);
     return res.json(resultado);
   } catch (err) {
@@ -67,22 +68,6 @@ async function totalClientes(req, res) {
   }
 }
 
-async function totalClientes(req, res) {
-  try {
-    const total = await totalClientesService.totalClientes(); 
-
-    return res.status(200).json({
-      success: true,
-      total
-    });
-  }catch (error) {
-    console.error(error);
-    return res.status(400).json({
-      success: false,
-      message: "Erro ao carregar total de clientes"
-    });
-  }
-}
 
 
 async function dashboard(req, res) {

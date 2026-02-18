@@ -6,13 +6,15 @@ import type { ItemNota } from "../../types/NotaFiscal";
 
 
 
+
 export function NovaNota() {
     const [clientes, setClientes] = useState<Cliente[]>([]);
     const [clienteId, setClienteId] = useState("");
     const [tipo, setTipo] = useState<"SERVICO" | "PRODUTO">("SERVICO");
     const [itens, setItens] = useState<ItemNota[]>([
-     { descricao: "", quantidade: "", valorUnitario: "" },
+        { descricao: "", quantidade: "", valorUnitario: "" },
     ]);
+    const [observacao, setObservacao] = useState("");
     const [loading, setLoading] = useState(false);
 
 
@@ -26,6 +28,9 @@ export function NovaNota() {
     function adicionarItem() {
         setItens([...itens, { descricao: "", quantidade: "1", valorUnitario: "0" }]);
     }
+
+
+
 
     function atualizarItem<K extends keyof ItemNota>(
         index: number,
@@ -49,18 +54,19 @@ export function NovaNota() {
         try {
             setLoading(true);
 
-         
+
 
             await api.post("/notas", {
                 cliente: clienteId,
                 tipo,
                 itens,
+                observacao,
             });
 
             alert("Nota emitida com sucesso!");
 
             setClienteId("");
-            setItens([{ descricao: "", quantidade: "1", valorUnitario: "0" }]);
+            setItens([{ descricao: "", quantidade: "1", valorUnitario: "0", }]);
         } catch (error) {
             console.error(error);
             alert("Erro ao emitir nota");
@@ -124,7 +130,34 @@ export function NovaNota() {
                         }
                     />
                 </div>
+
+
             ))}
+
+
+
+
+            <div>
+
+                <h3 className={styles.descricao}>
+                    Observações(opcional)
+                </h3>
+
+                <textarea
+                    placeholder="Observaçõesa adicionais a nota"
+                    value={observacao}
+                    onChange={(e) => setObservacao(e.target.value)}
+                    rows={4}
+                />
+            </div>
+
+
+
+
+
+
+
+
 
             <button className={styles.adicionarItem} type="button" onClick={adicionarItem}>
                 + Adicionar Item
@@ -133,6 +166,6 @@ export function NovaNota() {
             <button className={styles.emitir} type="submit" disabled={loading}>
                 {loading ? "Emitindo..." : "Emitir Nota"}
             </button>
-        </form>
+        </form >
     );
 }

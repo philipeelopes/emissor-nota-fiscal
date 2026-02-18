@@ -13,6 +13,12 @@ const NotaFiscalSchema = new mongoose.Schema(
             enum: ["SERVICO", "PRODUTO"],
             required: true,
         },
+        
+        observacao:{
+          type: String, 
+          default: "",
+        },
+
         descricao: String,
         valorTotal: {
             type: Number,

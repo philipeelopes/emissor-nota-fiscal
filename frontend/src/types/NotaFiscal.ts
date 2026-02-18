@@ -15,6 +15,8 @@ export type ItemNota = {
 };
 
 export type NotaFiscal = {
+  observacao: string;
+  discriminacao: string;
   _id: string;
   numero: number;
   cliente: Cliente; 

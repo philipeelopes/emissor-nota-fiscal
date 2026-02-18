@@ -7,14 +7,14 @@ async function faturamento({ dataInicio, dataFim}) {
         match.dataEmissao = {};
 
         if(dataInicio) match.dataEmissao.$gte = new Date(dataInicio)
-        if(dataFim) match.dataEmissao.$gte = new Date(dataFim)
+        if(dataFim) match.dataEmissao.$lte = new Date(dataFim)
     }
 
     const resultado = await NotaFiscal.aggregate([
         { $match: match},
         {
             $group:{
-                id: null,
+                _id: null,
                 totalFaturado: { $sum: "$valorTotal"},
                 quantidadeDeNotas : { $sum: 1 }
             }

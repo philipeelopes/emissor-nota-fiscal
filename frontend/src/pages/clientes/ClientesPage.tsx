@@ -8,44 +8,44 @@ import styles from "./ClientesPage.module.css";
 export default function ClientesPage() {
     const [clientes, setClientes] = useState<Cliente[]>([]);
     const [loading, setLoading] = useState(true);
-    
 
-    
-        async function carregarClientes() {
-            try {
-                const data = await listarClientes();
-                setClientes(data);
-            } catch (error) {
-                console.error("Erro ao carregar clientes", error);
-            } finally {
-                setLoading(false);
-            }
+
+
+    async function carregarClientes() {
+        try {
+            const data = await listarClientes();
+            setClientes(data);
+        } catch (error) {
+            console.error("Erro ao carregar clientes", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        carregarClientes();
+    }, []);
+
+    async function handleExcluirCliente(id: string) {
+        const confirmação = window.confirm(" Tem certeza de deseja excluir este Cliente? ")
+
+        if (!confirmação) return;
+
+        try {
+            await deletarCliente(id);
+            carregarClientes();
+        } catch (error) {
+            console.error("Erro ao excluir cliente", error);
+            alert("Erro ao excluir cliente");
         }
 
-            useEffect(() => {
-                 carregarClientes();
-            }, []);
+    }
 
-            async function handleExcluirCliente(id: string) {
-                const confirmação = window.confirm(" Tem certeza de deseja excluir este Cliente? ")
-                
-                if (!confirmação) return;
 
-                try{
-                    await deletarCliente(id);
-                    carregarClientes();
-                }catch(error){
-                    console.error("Erro ao excluir cliente", error);
-                    alert("Erro ao excluir cliente");
-                }
-                
-            }
 
-        
 
-           
-       
-    
+
+
 
     if (loading) {
         return <p>Carregando Clientes...</p>
@@ -75,15 +75,17 @@ export default function ClientesPage() {
                             <td>{cliente.email}</td>
                             <td>{cliente.documento}</td>
                             <td>{cliente.endereco}</td>
-                            
-                        
-                            <button className={styles.btnExcluir}
-                            onClick={() => handleExcluirCliente(cliente._id)}
-                            >
-                            Excluir
-                            </button>
-                            
-                            
+
+                            <td>
+                                <button className={styles.btnExcluir}
+                                    onClick={() => handleExcluirCliente(cliente._id)}
+                                >
+                                    Excluir
+                                </button>
+                            </td>
+
+
+
                         </tr>
                     ))}
                 </tbody>

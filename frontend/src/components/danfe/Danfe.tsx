@@ -23,7 +23,8 @@ export default function Danfe({ nota }: DanfeProps) {
       0
     ) || 0;
 
- 
+  console.log("DANFE NOTA:", nota);
+
 
   return (
     <div className={styles.danfe} id="danfe">
@@ -124,10 +125,7 @@ export default function Danfe({ nota }: DanfeProps) {
         </table>
       </section>
 
-      <section className={styles.bloco}>
-        <h2>Discriminação do Serviço</h2>
-        <p>{nota.discriminacao}</p>
-      </section>
+
 
       {/* Totais */}
       <section className={styles.totais}>
@@ -152,9 +150,14 @@ export default function Danfe({ nota }: DanfeProps) {
         </p>
       </section>
 
+
       <section className={styles.bloco}>
-        <h2>Discriminação do Serviço</h2>
-        <p>{total}</p>
+        <h2>Observações</h2>
+        <p>
+          {nota.observacao && nota.observacao.trim() !== ""
+            ? nota.observacao
+            : "—"}
+        </p>
       </section>
 
       {/* Rodapé */}
