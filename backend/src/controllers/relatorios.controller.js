@@ -4,7 +4,6 @@ const porClienteService = require("../services/relatorios/porCliente.service");
 const statusService = require("../services/relatorios/status.service");
 const mensalService = require("../services/relatorios/mensal.service");
 const totalService = require("../services/relatorios/total.service");
-const totalClientesService = require("../services/relatorios/totalClientes.service");
 const dashboardService = require("../services/relatorios/dashboard.service");
 const comparacaoService = require("../services/relatorios/relatorios.service");
 
@@ -24,9 +23,10 @@ async function faturamento(req, res) {
 
 async function porCliente(req, res) {
   try {
-    const resultado = await porClienteService.porCliente();
+    const resultado = await porClienteService.porCliente(req.query);
     return res.json(resultado);
   } catch (err) {
+    console.error(err)
     return res.status(500).json({ error: err.message });
   }
 }

@@ -1,11 +1,26 @@
 const NotaFiscal = require("../../models/NotaFiscal");
 
+async function porCliente(dataInicio, dataFim) {
+  const match = {
+    status: "EMITIDA"
+  };
 
+  if (dataInicio || dataFim) {
+    match.dataEmissao = {};
 
+    if (dataInicio) {
+      match.dataEmissao.$gte = new Date(dataInicio);
+    }
 
-async function porCliente() {
+    if (dataFim) {
+      const fim = new Date(dataFim);
+      fim.setHours(23, 59, 59, 999);
+      match.dataEmissao.$lte = fim;
+    }
+  }
+
   const resultado = await NotaFiscal.aggregate([
-    { $match: { status: "EMITIDA" } },
+    { $match: match },
     {
       $group: {
         _id: "$cliente",
