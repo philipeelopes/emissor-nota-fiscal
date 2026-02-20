@@ -21,15 +21,25 @@ async function faturamento(req, res) {
   }
 }
 
+
+
 async function porCliente(req, res) {
   try {
-    const resultado = await porClienteService.porCliente(req.query);
+    const { dataInicio, dataFim } = req.query;
+
+    const resultado = await porClienteService.porCliente(
+      dataInicio,
+      dataFim
+    );
+
     return res.json(resultado);
   } catch (err) {
-    console.error(err)
+    console.error(err);
     return res.status(500).json({ error: err.message });
   }
 }
+
+
 
 async function status(req, res) {
   try {

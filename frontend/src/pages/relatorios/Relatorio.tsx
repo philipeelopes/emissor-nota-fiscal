@@ -5,8 +5,12 @@ import {
   getPorCliente
 } from "../../services/relatorios.service";
 import styles from "../relatorios/Relatorio.module.css"
+import { DashboardCards } from "./components/DashboardCards";
 
 import type { DashboardResumo, FaturamentoPorCliente, FaturamentoResumo } from "../../types/Relatorios";
+import { FiltroPeriodo } from "./components/FiltroPeriodo";
+import { TabelaPorCliente } from "./components/TabelaPorCliente";
+import { ResumoPeriodo } from "./components/ResumoPeriodo";
 
 export default function Relatorios() {
   const [dashboard, setDashboard] = useState<DashboardResumo | null>(null);
@@ -14,9 +18,6 @@ export default function Relatorios() {
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
   const [faturamento, setFaturamento] = useState<FaturamentoResumo | null>(null);
-
-
-
 
 
 
@@ -56,35 +57,8 @@ export default function Relatorios() {
 
       <h2>Resumo</h2>
 
+      {dashboard && <DashboardCards dashboard={dashboard} />}
 
-      {dashboard && (
-        <div className={styles.cards}>
-          <div className={styles.card}>
-            <strong>Total de notas</strong>
-            <p>{dashboard.totalNotas ?? 0}</p>
-          </div>
-
-          <div className={styles.card}>
-            <strong>Canceladas</strong>
-            <p>{dashboard.notasCanceladas ?? 0}</p>
-          </div>
-
-          <div className={styles.card}>
-            <strong>Faturamento</strong>
-            <p>
-              R$ {(dashboard.valorEmitido ?? 0).toLocaleString("pt-BR", {
-                minimumFractionDigits: 2
-              })}
-            </p>
-          </div>
-
-          <div className={styles.card}>
-            <strong>Clientes</strong>
-            <p>{dashboard.totalClientes ?? 0}</p>
-          </div>
-        </div>
-      )
-      }
 
 
       <section className={styles.porCliente}>
@@ -99,77 +73,29 @@ export default function Relatorios() {
       </section>
 
 
-      <h2>Faturamento por período</h2>
-
-      <div className={styles.filtro}>
-        <div>
-          <label>Data início</label>
-          <input
-            type="date"
-            value={dataInicio}
-            onChange={(e) => setDataInicio(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label>Data fim</label>
-          <input
-            type="date"
-            value={dataFim}
-            onChange={(e) => setDataFim(e.target.value)}
-          />
-        </div>
-
-        <button onClick={buscarFaturamento}>
-          Aplicar
-        </button>
-      </div>
-
-      <button
-        onClick={async () => {
+      <FiltroPeriodo
+        dataInicio={dataInicio}
+        dataFim={dataFim}
+        onChangeInicio={setDataInicio}
+        onChangeFim={setDataFim}
+        onAplicar={buscarFaturamento}
+        onLimpar={async () => {
           const cli = await getPorCliente();
           setClientes(cli);
           setDataInicio("");
           setDataFim("");
           setFaturamento(null);
         }}
-      >
-        Limpar filtro
-      </button>
+      />
 
-      <table className={styles.tabela}>
-        <thead>
-          <tr>
-            <th>Cliente</th>
-            <th>Total faturado</th>
-            <th>Notas</th>
-          </tr>
-        </thead>
-        <tbody>
-          {clientes.map((c, index) => (
-            <tr key={index}>
-              <td>{c.cliente}</td>
-              <td>
-                R$ {c.totalFaturado.toLocaleString("pt-BR", {
-                  minimumFractionDigits: 2
-                })}
-              </td>
-              <td>{c.quantidadeNotas}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ResumoPeriodo faturamento={faturamento} />
+
+      <h2>Por cliente</h2>
+      <TabelaPorCliente clientes={clientes} />
 
 
 
-      {
-        faturamento && (
-          <div>
-            <p>Total faturado: R$ {faturamento.totalFaturado}</p>
-            <p>Quantidade de notas: {faturamento.quantidadeDeNotas}</p>
-          </div>
-        )
-      }
+
     </div >
 
 
