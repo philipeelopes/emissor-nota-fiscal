@@ -22,7 +22,8 @@
 .btnExcluir{
     border: none;
     width: 80px;
-    margin: 10px;
+    height: 40px;
+    margin: 2px;
     background-image: linear-gradient(#E6CA7F, #D4AA7D);
     color: black;
     border-radius: 40px;

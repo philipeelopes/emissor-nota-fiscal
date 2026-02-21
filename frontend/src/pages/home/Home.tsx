@@ -54,7 +54,9 @@ export default function Home() {
           <div className={styles.card}>
             <div className={styles.icon}>💰</div>
             <h3>
-              R$ {(dados.valorEmitido ?? 0).toFixed(2)}
+              R$ {(dados.valorEmitido ?? 0).toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+              })}
             </h3>
             <p>Valor total emitido</p>
           </div>

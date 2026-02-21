@@ -56,7 +56,9 @@ export default function NotasPage() {
                     {nota.status}
                   </span>
                 </td>
-                <td>R$ {nota.valorTotal.toFixed(2)}</td>
+                <td>R$ {nota.valorTotal.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+          })}</td>
 
                 <td>
                   <Link

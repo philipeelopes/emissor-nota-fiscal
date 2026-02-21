@@ -43,7 +43,7 @@ export function FiltroPeriodo({
         <button onClick={onAplicar}>Aplicar</button>
       </div>
 
-      <button onClick={onLimpar}>Limpar filtro</button>
+      <button className={styles.limpar} onClick={onLimpar}>Limpar filtro</button>
     </>
   );
 }

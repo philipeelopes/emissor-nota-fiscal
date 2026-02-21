@@ -174,7 +174,9 @@ export default function DetalhesNota() {
         </tbody>
       </table>
 
-      <h3>Total da Nota: R$ {totalCalculado.toFixed(2)}</h3>
+      <h3>Total da Nota: R$ {totalCalculado.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+          })}</h3>
 
 
       <div className={styles.buttons}>

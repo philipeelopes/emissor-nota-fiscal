@@ -134,9 +134,6 @@ export function NovaNota() {
 
             ))}
 
-
-
-
             <div>
 
                 <h3 className={styles.descricao}>
@@ -150,14 +147,6 @@ export function NovaNota() {
                     rows={4}
                 />
             </div>
-
-
-
-
-
-
-
-
 
             <button className={styles.adicionarItem} type="button" onClick={adicionarItem}>
                 + Adicionar Item

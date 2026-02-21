@@ -1,8 +1,7 @@
-
-
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  padding-top: 20px;
   gap: 26px;
   margin-bottom: 32px;
 }
@@ -12,13 +11,19 @@
   background: #fff;
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.267);
   transition: 0.4s;
+  
+  
 }
 
-.card:hover{
-    transform: scale(1.05);
-    transition: 0.4s;
+.card:hover {
+  background-image:linear-gradient(#E6CA7F, #D4AA7D) ;
+  transform: scale(1.05);
+  transition: 0.4s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.521);
+  
+  
 }
 
 
@@ -27,6 +32,7 @@
   color: #666;
 }
 
+
 .card strong {
   display: block;
   margin-top: 8px;
@@ -34,19 +40,23 @@
   color: #111;
 }
 
-.porCliente h2{
-    color:  #d1b771;
-    
-  
+.resumos {
+  color: #E6CA7F;
 }
 
-.porCliente ul{
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 12px 0px 12px 0px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.432);
+.porCliente h2 {
+  color: #091519;
+}
+
+.porCliente ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0px 12px 0px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid;
+  border-image: linear-gradient(to right, #E6CA7F, #D4AA7D, transparent) 1;
 }
 
 
@@ -74,12 +84,40 @@
   padding: 8px 16px;
   border-radius: 8px;
   border: none;
-  background:  #E6CA7F;
-  color: white;
+  background: #E6CA7F;
+  color: #091519;
   cursor: pointer;
+  transition: 0.4s;
 }
 
 
+.filtro button:hover {
+  background-image: linear-gradient(#D4AA7D, #E6CA7F);
+  transform: scale(1.05);
+  transition: 0.4s;
+
+}
+
+.limpar {
+  width: 100px;
+  height: 35px;
+  background: #E6CA7F;
+  color: #091519;
+  border: none;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+
+.limpar:hover {
+  background-image: linear-gradient(#D4AA7D, #E6CA7F);
+  transform: scale(1.05);
+  transition: 0.4s;
+}
+
+
+.porClient {
+  padding-top: 20px;
+}
 
 .tabela {
   width: 100%;
@@ -87,12 +125,13 @@
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
+  margin-top: 20px;
 }
 
 .tabela th {
   text-align: left;
   padding: 12px;
-  background: #f5f5f5;
+  background: #E6CA7F;
   font-size: 0.85rem;
 }
 
@@ -104,5 +143,3 @@
 .tabela tr:hover {
   background: #fafafa;
 }
-
-

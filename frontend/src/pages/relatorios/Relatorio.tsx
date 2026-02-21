@@ -53,9 +53,9 @@ export default function Relatorios() {
 
   return (
     <div>
-      <h1>Relatórios</h1>
+      <h1>Relatórios <span className={styles.resumos}>Resumos</span></h1>
 
-      <h2>Resumo</h2>
+      
 
       {dashboard && <DashboardCards dashboard={dashboard} />}
 
@@ -90,7 +90,7 @@ export default function Relatorios() {
 
       <ResumoPeriodo faturamento={faturamento} />
 
-      <h2>Por cliente</h2>
+      <h2  className={styles.porClient}>Por cliente</h2>
       <TabelaPorCliente clientes={clientes} />
 
 
