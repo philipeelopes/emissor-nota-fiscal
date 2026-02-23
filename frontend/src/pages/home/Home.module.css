@@ -1,7 +1,8 @@
 .container {
   padding: 32px;
   width: 90vw;
-
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .header {
@@ -44,8 +45,10 @@
 }
 
 .card:hover {
+  background-image:linear-gradient(#E6CA7F, #D4AA7D);
   transform: translateY(-6px);
-  box-shadow: 0 20px 30px #74737381;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.521);
+  border: none;
 
 }
 
@@ -100,14 +103,128 @@
 }
 
 
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px; 
+    margin: 0 auto;
+  }
+}
 
 
+/* Notebook e desktops menores */
+@media (max-width: 1440px) {
+ .container {
+    width: 95vw;
+    padding: 24px;
+  }
+
+  .header h1 {
+    font-size: 36px;
+  }
+
+}
 
 
+/* Tablets e notebooks muito pequenos */
+@media (max-width: 1024px) {
 
+    .cards {
+    grid-template-columns: 1fr;
+  }
 
-@media (max-width: 900px) {
   .dashboard {
     grid-template-columns: 1fr;
   }
+
+  .header h1 {
+    font-size: 32px;
+  }
+
+  .header h2 {
+    font-size: 22px;
+  }
+}
+
+
+/* Celulares */
+@media (max-width: 768px) {
+   .container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .header h1 {
+    font-size: 28px;
+  }
+
+  .header h2 {
+    font-size: 20px;
+  }
+
+  .cards {
+    gap: 16px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+  .grafico{
+    width: 100%;
+    overflow-x: auto;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  .dashboard{
+    grid-template-columns: 1fr;
+}
+
+  .graficoToggle {
+    flex-wrap: wrap;
+  }
+
+  .graficoToggle button {
+    flex: 1 1 120px;
+    padding: 10px;
+  }
+
+  
+}
+
+
+/* Celulares pequenos */
+@media (max-width: 480px) {
+  .container{
+    padding: 12px;
+  }
+  .header h1 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .header h2 {
+    font-size: 18px;
+  }
+
+  .header p {
+    font-size: 14px;
+  }
+
+  .card{
+    padding: 16px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  .icon {
+    font-size: 28px;
+  }
+  
 }

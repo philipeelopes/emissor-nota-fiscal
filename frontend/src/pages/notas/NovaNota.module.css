@@ -1,26 +1,38 @@
 .form {
-  width: auto;
+  width: 100%;
+  max-width: 800px;
   height: auto;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.329);
   padding: 16px;
- 
-  
+  box-sizing: border-box;
   border-radius: 6px;
 }
 
 .row {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 16px;
 }
 
 textarea{
-  width: 595px;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100px;
 }
 
 input, select, button {
   padding: 10px;
   margin:  10px 10px 10px 0px;
+}
+
+input, select, textarea {
+  flex: 1; 
+  min-width: 200px; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 
@@ -37,4 +49,44 @@ input, select, button {
      transform: scale(1.1);
     transition: 0.3s;
     background-image: linear-gradient(#D4A97D, #E6CA7F);
+}
+
+@media (max-width: 1024px) {
+  .form {
+    padding: 24px;
+  }
+  
+  input, select {
+    margin: 5px 0;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column; 
+    gap: 10px;
+  }
+
+  input, select, textarea, .emitir, .adicionarItem {
+    width: 100%; 
+    margin: 8px 0;
+  }
+
+  .emitir, .adicionarItem {
+    padding: 15px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .form {
+    padding: 12px;
+    box-shadow: none; 
+    border: 1px solid #eee;
+  }
+
+  .emitir:hover, .adicionarItem:hover {
+    transform: none;
+  }
 }

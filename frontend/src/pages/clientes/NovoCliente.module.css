@@ -1,8 +1,10 @@
 .form{
     max-width: 1000px;
+    width: 100%;
     height: auto;
-    margin: 24px 0;
-    padding: 24px ;
+    padding: 24px;
+    
+    box-sizing: border-box;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.137);
     border-radius: 6px;
     display: flex;
@@ -15,6 +17,8 @@
     font-size: 1.8rem;
 }
 
+
+
 .form input{
     padding: 12px;
     border-radius: 4px;
@@ -22,12 +26,12 @@
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.041);
 }
 
+
 .form input:hover{
-    transform: scale(1.03);
+    transform: scale(1.01);
     transition: 0.4s;
     
 }
-
 
 .form button{
     padding: 12px;
@@ -48,4 +52,53 @@
 .form button:disabled{
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+/*not*/
+@media (max-width: 1024px) {
+    .form {
+        padding: 20px;
+        margin: 16px auto;
+    }
+    
+    .form h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/*mobile*/
+@media (max-width: 768px) {
+    .form {
+        width: 100%;
+        margin: 10px 0;
+        padding: 16px;
+        box-shadow: none; 
+        border: 1px solid #eee; 
+    }
+
+    .form h2 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .form input, .form button {
+        padding: 14px; 
+        font-size: 16px; 
+    }
+
+ 
+    .form input:hover, .form button:hover {
+        transform: none;
+    }
+}
+
+@media (max-width: 320px) {
+    .form {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .form h2 {
+        font-size: 1.1rem;
+    }
 }

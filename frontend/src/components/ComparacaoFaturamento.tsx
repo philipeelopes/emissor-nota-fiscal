@@ -8,7 +8,7 @@ import {
     ResponsiveContainer,
     Legend
 } from "recharts";
-import styles from "../components/ComparacaoFaturamento.module.css";
+import styles from "../components/ComparacaoFaturamento.module.css"
 import { useEffect, useState } from "react";
 import { comparacaoFaturamentoAnual } from "../services/dashboard.service";
 

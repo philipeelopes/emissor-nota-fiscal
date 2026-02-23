@@ -15,7 +15,7 @@ export default function PageLoader({ children }: Props) {
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 400); // tempo do loader (ajuste como quiser)
+    }, 400); // tempo do loader 
 
     return () => clearTimeout(timer);
   }, [location.pathname]);

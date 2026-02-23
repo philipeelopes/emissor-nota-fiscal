@@ -58,38 +58,37 @@ export default function ClientesPage() {
 
             {clientes.length === 0 && <p>Nenhum cliente cadastrado.</p>}
 
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Documento</th>
-                        <th>Endereço</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {clientes.map((cliente) => (
-                        <tr key={cliente._id}>
-                            <td>{cliente.nome}</td>
-                            <td>{cliente.email}</td>
-                            <td>{cliente.documento}</td>
-                            <td>{cliente.endereco}</td>
-
-                            <td>
-                                <button className={styles.btnExcluir}
-                                    onClick={() => handleExcluirCliente(cliente._id)}
-                                >
-                                    Excluir
-                                </button>
-                            </td>
-
-
-
+            <div className={styles.tableContainer}>
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Documento</th>
+                            <th>Endereço</th>
+                            <th>Ações</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {clientes.map((cliente) => (
+                            <tr key={cliente._id}>
+                                <td>{cliente.nome}</td>
+                                <td>{cliente.email}</td>
+                                <td>{cliente.documento}</td>
+                                <td>{cliente.endereco}</td>
+                                <td>
+                                    <button
+                                        className={styles.btnExcluir}
+                                        onClick={() => handleExcluirCliente(cliente._id)}
+                                    >
+                                        Excluir
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 

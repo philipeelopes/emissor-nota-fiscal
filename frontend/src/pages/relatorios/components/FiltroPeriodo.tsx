@@ -1,8 +1,10 @@
 import styles from "../Relatorio.module.css";
 
+
 interface Props {
   dataInicio: string;
   dataFim: string;
+  loading: boolean,
   onChangeInicio: (value: string) => void;
   onChangeFim: (value: string) => void;
   onAplicar: () => void;
@@ -12,11 +14,14 @@ interface Props {
 export function FiltroPeriodo({
   dataInicio,
   dataFim,
+  loading,
   onChangeInicio,
   onChangeFim,
   onAplicar,
   onLimpar,
 }: Props) {
+
+ 
   return (
     <>
       <h2>Faturamento por período</h2>
@@ -28,6 +33,7 @@ export function FiltroPeriodo({
             type="date"
             value={dataInicio}
             onChange={(e) => onChangeInicio(e.target.value)}
+            disabled={loading}
           />
         </div>
 
@@ -37,13 +43,20 @@ export function FiltroPeriodo({
             type="date"
             value={dataFim}
             onChange={(e) => onChangeFim(e.target.value)}
+            disabled={loading}
           />
         </div>
 
-        <button onClick={onAplicar}>Aplicar</button>
+        <button onClick={onAplicar} disabled={loading}>
+          {loading ? "Aplicando..." : "Aplicar"}</button>
       </div>
 
-      <button className={styles.limpar} onClick={onLimpar}>Limpar filtro</button>
+      <button 
+      className={styles.limpar} 
+      onClick={onLimpar}
+      disabled={loading}
+      >
+      Limpar filtro</button>
     </>
   );
 }

@@ -26,53 +26,57 @@ export default function NotasPage() {
         <p className={styles.empty}>Nenhuma nota cadastrada.</p>
       )}
 
-      {notas.length > 0 && (
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Cliente</th>
-              <th>Status</th>
-              <th>Valor</th>
-            </tr>
-          </thead>
-          <tbody>
-            {notas.map((nota) => (
-              <tr
-                key={nota._id}
-              >
-                <td >
-                  <Link className={styles.cliente} to={`/notas/${nota._id}`}>
-                    {nota.cliente?.nome ?? "Cliente não iformado"}
-                  </Link>
-                </td>
-                <td>
-                  <span
-                    className={
-                      nota.status === "CANCELADA"
-                        ? styles.statusCancelada
-                        : styles.statusEmitida
-                    }
-                  >
-                    {nota.status}
-                  </span>
-                </td>
-                <td>R$ {nota.valorTotal.toLocaleString("pt-BR", {
-            minimumFractionDigits: 2,
-          })}</td>
+      <div className={styles.tableWrapper}>
 
-                <td>
-                  <Link
-                    to={`/notas/${nota._id}`}
-                    className={styles.link}
-                  >
-                    Ver detalhes
-                  </Link>
-                </td>
+        {notas.length > 0 && (
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Status</th>
+                <th>Valor</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+            <tbody>
+              {notas.map((nota) => (
+                <tr
+                  key={nota._id}
+                >
+                  <td >
+                    <Link className={styles.cliente} to={`/notas/${nota._id}`}>
+                      {nota.cliente?.nome ?? "Cliente não iformado"}
+                    </Link>
+                  </td>
+                  <td>
+                    <span
+                      className={
+                        nota.status === "CANCELADA"
+                          ? styles.statusCancelada
+                          : styles.statusEmitida
+                      }
+                    >
+                      {nota.status}
+                    </span>
+                  </td>
+                  <td>R$ {nota.valorTotal.toLocaleString("pt-BR", {
+                    minimumFractionDigits: 2,
+                  })}</td>
+
+                  <td>
+                    <Link
+                      to={`/notas/${nota._id}`}
+                      className={styles.link}
+                    >
+                      Ver detalhes
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+
     </div>
   );
 }

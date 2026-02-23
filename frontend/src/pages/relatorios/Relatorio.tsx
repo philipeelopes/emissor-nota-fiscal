@@ -7,6 +7,7 @@ import {
 import styles from "../relatorios/Relatorio.module.css"
 import { DashboardCards } from "./components/DashboardCards";
 
+
 import type { DashboardResumo, FaturamentoPorCliente, FaturamentoResumo } from "../../types/Relatorios";
 import { FiltroPeriodo } from "./components/FiltroPeriodo";
 import { TabelaPorCliente } from "./components/TabelaPorCliente";
@@ -18,6 +19,8 @@ export default function Relatorios() {
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
   const [faturamento, setFaturamento] = useState<FaturamentoResumo | null>(null);
+  const [loading, setLoading] = useState(false);
+  
 
 
 
@@ -38,20 +41,30 @@ export default function Relatorios() {
       alert("Selecione data início e data fim");
       return;
     }
+    
     if (new Date(dataInicio) > new Date(dataFim)) {
       alert("Data início não pode ser maior que data fim");
       return;
     }
 
-    const fat = await getFaturamento({
+    try{
+      setLoading(true);
+
+      const fat = await getFaturamento({
       dataInicio,
       dataFim,
     });
 
+      await new Promise(r => setTimeout(r, 800))
     setFaturamento(fat);
+    }finally{
+      setLoading(false)
+    }
   }
 
+
   return (
+
     <div>
       <h1>Relatórios <span className={styles.resumos}>Resumos</span></h1>
 
@@ -85,8 +98,9 @@ export default function Relatorios() {
           setDataInicio("");
           setDataFim("");
           setFaturamento(null);
-        }}
-      />
+          setLoading(false);
+        } } loading={loading}      />
+     
 
       <ResumoPeriodo faturamento={faturamento} />
 
