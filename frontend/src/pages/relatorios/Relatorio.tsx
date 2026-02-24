@@ -65,7 +65,7 @@ export default function Relatorios() {
 
   return (
 
-    <div>
+    <div className={styles.container}>
       <h1>Relatórios <span className={styles.resumos}>Resumos</span></h1>
 
       

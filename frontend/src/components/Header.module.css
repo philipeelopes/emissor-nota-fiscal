@@ -1,27 +1,33 @@
 .header {
-    padding: 1rem 4%;
+    padding: 1rem 2%;
     background-color: #091519;
     color: #fff;
-    min-height: 80px;
+    min-height: 100px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow: hidden;
 }
 
 .menu {
     font-size: 1.3rem;
-    gap: 2rem;
     display: flex;
-    gap: 30px;
+    gap: 80px;
     align-items: center;
+}
 
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .nota,
 .clientes,
-.relatorios {
+.relatorios,
+.home {
     font-weight: bolder;
     text-decoration: none;
     color: white;
@@ -29,10 +35,13 @@
 }
 
 .nota:hover,
-.clientes:hover {
+.clientes:hover,
+.home:hover  {
     color: #D4A97D;
     transition: 0.5s;
-    border-bottom: 2px solid #D4A97D;
+    background-color: #0e2025;
+    padding: 15px;
+    border-radius: 40px;
 
 }
 
@@ -53,29 +62,15 @@
 
 .left {
     display: flex;
-    flex-direction: column;
     gap: 3rem;
 }
 
+.logo {
+    height: 60px;
+    width: auto;
+    transform: scale(4.3);
+    padding-right: 15px;
 
-
-.home {
-    font-weight: bolder;
-    text-decoration: none;
-    color: white;
-    transition: 0.5s;
-}
-
-.home:hover {
-    color: #D4A97D;
-    transition: 0.5s;
-    border-bottom: 2px solid #D4A97D;
-}
-
-
-img {
-    width: 200px;
-    contain: cover;
 }
 
 /* telas extragrandes para não esparramar*/
@@ -89,52 +84,59 @@ img {
 
 /*notebooks*/
 @media (max-width: 1440px) {
-  .container {
-    width: 92vw;
-    padding: 24px;
-  }
+    .header {
+        flex-direction: column-reverse;
+        padding: 2rem 3rem;
+        height: auto;
+    }
 
-  .header {
-    padding: 2rem 3rem;
-    height: auto; 
-  }
+    .header h1 {
+        font-size: 34px;
+    }
 
-  .header h1 {
-    font-size: 34px;
-  }
-
-  .menu {
-    gap: 40px;
-  }
+    .menu {
+        gap: 20px;
+        display: flex;
+        align-items: end;
+        flex-direction: row;
+    }
+     .logo{
+        transform: scale(2.8);
+        contain: cover;
+        padding-left: 15px;
+        
+    }
+   
 }
 
 
 /*tablets*/
-    @media (max-width: 1280px) {
-        .menu {
-            gap: 30px;
-        }
-
-        .cards {
-            gap: 15px;
-        }
+@media (max-width: 1280px) {
+    .menu {
+        gap: 30px;
     }
+
+    .cards {
+        gap: 15px;
+    }
+}
 
 /*celulares*/
 @media (max-width: 768px) {
     .header {
         padding: 1.5rem 1rem;
-        flex-direction: column;
-        height: auto;
-        gap: 1px;
+        flex-direction: column-reverse;
+        min-height: auto;
+        gap: 25px;
         align-items: center;
         text-align: center;
     }
 
     .menu {
-        gap: 25px;
+        gap: 15px;
         flex-wrap: wrap;
         justify-content: center;
+        flex-direction: column;
         font-size: 1.2rem;
     }
 
@@ -142,10 +144,11 @@ img {
         gap: 1rem;
         align-items: center;
     }
-
-    img {
-        width: 150px;
+    .logo{
+        transform: scale(3.2);
+        padding-left: 15px;
     }
+   
 
 
     .relatorios {
@@ -157,15 +160,17 @@ img {
 
 /*celulares extra pequenos */
 @media (max-width: 320px) {
-  .header h1 {
-    font-size: 20px;
-  }
-  .relatorios {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-  .menu {
-    flex-direction: column;
-    gap: 10px;
-  }
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .relatorios {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .menu {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

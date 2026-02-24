@@ -21,7 +21,7 @@ export function FiltroPeriodo({
   onLimpar,
 }: Props) {
 
- 
+
   return (
     <>
       <h2>Faturamento por período</h2>
@@ -49,14 +49,16 @@ export function FiltroPeriodo({
 
         <button onClick={onAplicar} disabled={loading}>
           {loading ? "Aplicando..." : "Aplicar"}</button>
+
+        <button
+          className={styles.limpar}
+          onClick={onLimpar}
+          disabled={loading}
+        >
+          Limpar filtro</button>
       </div>
 
-      <button 
-      className={styles.limpar} 
-      onClick={onLimpar}
-      disabled={loading}
-      >
-      Limpar filtro</button>
+
     </>
   );
 }

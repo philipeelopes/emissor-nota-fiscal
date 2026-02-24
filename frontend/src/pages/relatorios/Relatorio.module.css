@@ -1,17 +1,19 @@
+
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   padding-top: 20px;
   gap: 26px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 
 .card {
   background: #fff;
   border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.267);
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.062);
   transition: 0.4s;
   
   
@@ -64,35 +66,45 @@
 
 
 .filtro {
+ background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
   display: flex;
-  gap: 16px;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  margin-bottom: 24px;
+  gap: 14px;
+  align-items: flex-end; 
+  margin-bottom: 40px;
+  border: 1px solid #f0f0f0;
 }
 
 .filtro label {
-  font-size: 0.8rem;
-  color: #555;
+ display: block;
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .filtro input {
-  width: 100%;
-  padding: 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  font-size: 1rem;
+  color: #444;
+  width: 280px;
 }
 
 .filtro button {
   padding: 8px 16px;
   border-radius: 8px;
   border: none;
+  font-weight: 400;
   background: #E6CA7F;
   color: #091519;
   cursor: pointer;
   transition: 0.4s;
 }
-
 
 .filtro button:hover {
   background-image: linear-gradient(#D4AA7D, #E6CA7F);
@@ -102,13 +114,10 @@
 }
 
 .limpar {
-  width: 100px;
-  height: 35px;
-  background: #E6CA7F;
-  color: #091519;
+  border-radius: 6px;
+  cursor: pointer;
   border: none;
-  border-radius: 10px;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
 .limpar:hover {
@@ -155,14 +164,23 @@
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 16px;
   }
+  .filtro input {
+    width: 250px;
+  }
 }
 
 /*mobile*/
 @media (max-width: 768px) {
+
   .filtro {
+   
     flex-direction: column; 
     align-items: stretch; 
     gap: 12px;
+  }
+
+  .filtro input{
+    width: 205px;
   }
 
   .filtro button, .limpar {
