@@ -1,7 +1,8 @@
-const NotaFiscal = require("../models/NotaFiscal")
-
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 async function atualizarNota(id, { descricao, itens }) {
+  // Validação dos itens
   if (itens && (!Array.isArray(itens) || itens.length === 0)) {
     throw new Error("A nota deve ter ao menos um item");
   }
@@ -16,27 +17,29 @@ async function atualizarNota(id, { descricao, itens }) {
     }
   }
 
-  const update = {};
+  // Busca a nota e verifica se não está cancelada
+  const nota = await prisma.notaFiscal.findUnique({ where: { id } });
 
-  if (descricao !== undefined) update.descricao = descricao;
+  if (!nota || nota.status === "CANCELADA") {
+    throw new Error("Nota não encontrada ou cancelada");
+  }
 
+  // Monta os dados de atualização
+  const updateData = {};
+  if (descricao !== undefined) updateData.descricao = descricao;
   if (itens) {
-    update.itens = itens;
-    update.valorTotal = itens.reduce(
+    updateData.itens = itens; // Prisma aceita Json para arrays de objetos
+    updateData.valorTotal = itens.reduce(
       (total, item) => total + item.quantidade * item.valorUnitario,
       0
     );
   }
 
-  const notaAtualizada = await NotaFiscal.findOneAndUpdate(
-    { _id: id, status: { $ne: "CANCELADA" } },
-    { $set: update },
-    { new: true, runValidators: true }
-  );
-
-  if (!notaAtualizada) {
-    throw new Error("Nota não encontrada ou cancelada");
-  }
+  // Atualiza a nota
+  const notaAtualizada = await prisma.notaFiscal.update({
+    where: { id },
+    data: updateData,
+  });
 
   return notaAtualizada;
 }

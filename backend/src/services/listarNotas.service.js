@@ -1,5 +1,5 @@
-const NotaFiscal = require("../models/NotaFiscal");
-
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 async function listarNotas(query) {
   const {
@@ -15,41 +15,51 @@ async function listarNotas(query) {
     order = "desc"
   } = query;
 
+  // Monta os filtros
   const filtros = {};
 
   if (status) filtros.status = status;
-  if (cliente) filtros.cliente = cliente;
+  if (cliente) filtros.clienteId = cliente; // Prisma relaciona pelo id
   if (tipo) filtros.tipo = tipo;
   if (numero) filtros.numero = Number(numero);
 
   if (dataInicio || dataFim) {
     filtros.dataEmissao = {};
-    if (dataInicio) filtros.dataEmissao.$gte = new Date(dataInicio);
-    if (dataFim) filtros.dataEmissao.$lte = new Date(dataFim);
+    if (dataInicio) filtros.dataEmissao.gte = new Date(dataInicio);
+    if (dataFim) filtros.dataEmissao.lte = new Date(dataFim);
   }
 
   const pageNumber = Number(page);
   const limitNumber = Number(limit);
   const skip = (pageNumber - 1) * limitNumber;
 
-  const sort = {};
-  sort[sortBy] = order === "asc" ? 1 : -1;
+  // Prisma usa { field: 'asc' | 'desc' }
+  const orderBy = {};
+  orderBy[sortBy] = order.toLowerCase() === "asc" ? "asc" : "desc";
 
-  const filtroComCliente = {
-    ...filtros,
-    cliente: { $ne: null }
-  }
+  // Conta total de registros
+  const total = await prisma.notaFiscal.count({
+    where: filtros
+  });
 
-  const total = await NotaFiscal.countDocuments(filtroComCliente);
-
-  const notas = await NotaFiscal.find(filtroComCliente)
-    .populate({
-      path: "cliente",
-      select: "nome email documento endereco"
-    })
-    .sort(sort)
-    .skip(skip)
-    .limit(limitNumber);
+  // Busca notas com cliente
+  const notas = await prisma.notaFiscal.findMany({
+    where: filtros,
+    include: {
+      cliente: {
+        select: {
+          id: true,
+          nome: true,
+          email: true,
+          documento: true,
+          endereco: true
+        }
+      }
+    },
+    orderBy,
+    skip,
+    take: limitNumber
+  });
 
   return {
     total,
@@ -62,8 +72,4 @@ async function listarNotas(query) {
   };
 }
 
-
-
-
 module.exports = { listarNotas };
-

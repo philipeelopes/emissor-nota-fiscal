@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("postgresql://emissor_postgres_user:XNgdRQsrljaz55m0FX61geSBYZL1pkG6@dpg-d6ersudm5p6s73fs2360-a/emissor_postgres")
+}
+
+
+
+
+model Cliente {
+  id        String       @id @default(uuid())
+  nome      String
+  documento String       @unique
+  email     String?
+  telefone  String?
+  endereco  String?
+  ativo     Boolean      @default(true)
+
+  notas     NotaFiscal[] // relação 1:N com NotaFiscal
+
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model NotaFiscal {
+  id          String       @id @default(uuid())
+  clienteId   String
+  cliente     Cliente     @relation(fields: [clienteId], references: [id])
+  tipo        String
+  status      String       @default("EMITIDA")
+  observacao  String       @default("")
+  descricao   String?
+  valorTotal  Float        @default(0)
+  numero      Int          @unique
+  dataEmissao DateTime     @default(now())
+  itens       Json         // array de objetos JSON se não quiser criar tabela separada
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Empresa {
+  id        String   @id @default(uuid())
+  nome      String
+  cnpj      String   @unique
+  email     String?
+  telefone  String?
+  endereco  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

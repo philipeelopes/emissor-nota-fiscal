@@ -1,19 +1,25 @@
 require("dotenv").config();
-console.log("MONGO_URI =", process.env.MONGO_URI);
-console.log("PORT =", process.env.PORT);
-const mongoose = require("mongoose");
-const app = require ("./app");
+const express = require("express");
+const { PrismaClient } = require("@prisma/client");
 
+const app = express();
+app.use(express.json()); // para ler JSON no corpo das requests
 
-console.log("SERVER.JS CARREGADO"); 
+const prisma = new PrismaClient();
+const PORT = process.env.PORT || 3333;
 
+app.get("/", (req, res) => {
+  res.send("API rodando 🚀");
+});
 
-mongoose
-    .connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log("MongoDB conectado")
-        app.listen(process.env.PORT, () => {
-            console.log(`Servidor rodando na porta ${process.env.PORT}`)
-        });
-    })
-    .catch((err) => console.log("Erro no mongoBD ", err))
+// Exemplo de rota para listar clientes
+app.get("/clientes", async (req, res) => {
+  const clientes = await prisma.cliente.findMany({
+    include: { notas: true } // traz as notas de cada cliente
+  });
+  res.json(clientes);
+});
+
+app.listen(PORT, () => {
+  console.log("Servidor rodando na porta", PORT);
+});

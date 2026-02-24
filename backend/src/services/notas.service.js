@@ -1,11 +1,7 @@
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
-const NotaFiscal = require("../models/NotaFiscal");
-
-
-
-
-// criar nota fiscal
-async function criarNota({ cliente, tipo, itens, descricao, observacao }) {
+async function criarNota({ clienteId, tipo, itens, descricao, observacao }) {
   if (!itens || itens.length === 0) {
     throw new Error("A nota precisa ter ao menos um item");
   }
@@ -23,46 +19,50 @@ async function criarNota({ cliente, tipo, itens, descricao, observacao }) {
     0
   );
 
-  const ultimaNota = await NotaFiscal.findOne().sort({ numero: -1 });
+  // Último número de nota
+  const ultimaNota = await prisma.notaFiscal.findFirst({
+    orderBy: { numero: "desc" }
+  });
   const novoNumero = ultimaNota ? ultimaNota.numero + 1 : 1;
 
-  return NotaFiscal.create({
-    cliente,
-    tipo,
-    descricao,
-    itens,
-    valorTotal,
-    numero: novoNumero,
-    observacao,
-  
+  return prisma.notaFiscal.create({
+    data: {
+      clienteId,
+      tipo,
+      descricao,
+      itens,      // Prisma permite JSON
+      valorTotal,
+      numero: novoNumero,
+      observacao,
+    }
   });
 }
 
-
 async function buscarNotaPorId(id) {
-  const nota = await NotaFiscal.findById(req.params.id)
-    .populate({
-      path: "cliente",
-      select: "nome email documento endereco"
-    });
+  const nota = await prisma.notaFiscal.findUnique({
+    where: { id },
+    include: {
+      cliente: true, // traz os dados do cliente relacionado
+    }
+  });
 
   if (!nota) {
-    return res.status(404).json({ error: "Nota não encontrada" });
+    throw new Error("Nota não encontrada");
   }
 
-  // 🔒 defesa extra
   if (!nota.cliente) {
     nota.cliente = {
       nome: "Cliente removido",
       email: "-",
       documento: "-",
-      endereco: "-"
+      endereco: "-",
     };
   }
+
+  return nota;
 }
 
-  module.exports = {
-    criarNota,
-    buscarNotaPorId,
-  };
-
+module.exports = {
+  criarNota,
+  buscarNotaPorId,
+};
