@@ -57,9 +57,14 @@ export function NovaNota() {
 
 
             await api.post("/notas", {
-                cliente: clienteId,
+                clienteId,
                 tipo,
-                itens,
+                descricao: "",
+                itens: itens.map(i => ({
+                    descricao: i.descricao,
+                    quantidade: Number(i.quantidade),
+                    valorUnitario: Number(i.valorUnitario)
+                })),
                 observacao,
             });
 
@@ -85,7 +90,7 @@ export function NovaNota() {
             >
                 <option value="">Selecione um cliente</option>
                 {clientes.map((cliente) => (
-                    <option key={cliente._id} value={cliente._id}>
+                    <option key={cliente.id} value={cliente.id}>
                         {cliente.nome}
                     </option>
                 ))}

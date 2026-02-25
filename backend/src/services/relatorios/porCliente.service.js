@@ -1,54 +1,56 @@
-const NotaFiscal = require("../../models/NotaFiscal");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 async function porCliente(dataInicio, dataFim) {
-  const match = {
+  const where = {
     status: "EMITIDA"
   };
 
   if (dataInicio || dataFim) {
-    match.dataEmissao = {};
+    where.dataEmissao = {};
 
     if (dataInicio) {
-      match.dataEmissao.$gte = new Date(dataInicio);
+      where.dataEmissao.gte = new Date(dataInicio);
     }
 
     if (dataFim) {
       const fim = new Date(dataFim);
       fim.setHours(23, 59, 59, 999);
-      match.dataEmissao.$lte = fim;
+      where.dataEmissao.lte = fim;
     }
   }
 
-  const resultado = await NotaFiscal.aggregate([
-    { $match: match },
-    {
-      $group: {
-        _id: "$cliente",
-        totalFaturado: { $sum: "$valorTotal" },
-        quantidadeDeNotas: { $sum: 1 }
+  const notas = await prisma.notaFiscal.findMany({
+    where,
+    include: {
+      cliente: {
+        select: {
+          nome: true
+        }
       }
-    },
-    {
-      $lookup: {
-        from: "clientes",
-        localField: "_id",
-        foreignField: "_id",
-        as: "cliente"
-      }
-    },
-    { $unwind: "$cliente" },
-    {
-      $project: {
-        _id: 0,
-        cliente: "$cliente.nome",
-        totalFaturado: 1,
-        quantidadeNotas: "$quantidadeDeNotas"
-      }
-    },
-    { $sort: { totalFaturado: -1 } }
-  ]);
+    }
+  });
 
-  return resultado;
+  const mapa = {};
+
+  for (const nota of notas) {
+    const clienteNome = nota.cliente?.nome ?? "Cliente removido";
+
+    if (!mapa[clienteNome]) {
+      mapa[clienteNome] = {
+        cliente: clienteNome,
+        totalFaturado: 0,
+        quantidadeNotas: 0
+      };
+    }
+
+    mapa[clienteNome].totalFaturado += nota.valorTotal;
+    mapa[clienteNome].quantidadeNotas += 1;
+  }
+
+  return Object.values(mapa).sort(
+    (a, b) => b.totalFaturado - a.totalFaturado
+  );
 }
 
 module.exports = { porCliente };

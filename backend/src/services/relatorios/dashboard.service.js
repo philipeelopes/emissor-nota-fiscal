@@ -1,23 +1,28 @@
-const NotaFiscal = require("../../models/NotaFiscal");
-const Cliente = require("../../models/Cliente");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
-async function rusumoDashboard() {
-    const totalNotas = await NotaFiscal.countDocuments();
-    const notasCanceladas = await NotaFiscal.countDocuments({ status: "CANCELADA" });
-  
-    const valorEmitido = await NotaFiscal.aggregate([
-        { $match: { status: "EMITIDA" } },
-        { $group: { _id: null, total: { $sum: "$valorTotal" } } }
-    ]);
+async function resumoDashboard() {
+  const totalNotas = await prisma.notaFiscal.count();
 
-    const totalClientes = await Cliente.countDocuments();
-    
-    return {
-        totalNotas,
-        notasCanceladas,
-        valorEmitido: valorEmitido[0]?.total ?? 0,
-        totalClientes
-    };
+  const notasCanceladas = await prisma.notaFiscal.count({
+    where: { status: "CANCELADA" }
+  });
+
+  const valorEmitido = await prisma.notaFiscal.aggregate({
+    where: { status: "EMITIDA" },
+    _sum: {
+      valorTotal: true
+    }
+  });
+
+  const totalClientes = await prisma.cliente.count();
+
+  return {
+    totalNotas,
+    notasCanceladas,
+    valorEmitido: valorEmitido._sum.valorTotal ?? 0,
+    totalClientes
+  };
 }
 
-module.exports = { rusumoDashboard };
+module.exports = { resumoDashboard };

@@ -1,16 +1,18 @@
-const NotaFiscal = require("../../models/NotaFiscal");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 async function status() {
-  const resultado = await NotaFiscal.aggregate([
-    {
-      $group: {
-        _id: "$status",
-        quantidade: { $sum: 1 }
-      }
+  const resultado = await prisma.notaFiscal.groupBy({
+    by: ["status"],
+    _count: {
+      _all: true
     }
-  ]);
+  });
 
-  return resultado;
+  return resultado.map(item => ({
+    status: item.status,
+    quantidade: item._count._all
+  }));
 }
 
 module.exports = { status };

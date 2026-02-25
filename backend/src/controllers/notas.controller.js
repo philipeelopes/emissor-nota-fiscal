@@ -1,38 +1,107 @@
-const NotaFiscal = require("../models/NotaFiscal");
-const { criarNota } = require("../services/notas.service");
-const { cancelarNota } = require("../services/cancelarNota.service");
-const { atualizarNota } = require("../services/atualizarNota.service");
-const { listarNotas } = require("../services/listarNotas.service");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
-
-
+/* =========================
+   CRIAR NOTA
+========================= */
 async function criar(req, res) {
   try {
-    const nota = await criarNota(req.body);
+    const { clienteId, tipo, itens, descricao, observacao } = req.body;
+
+    if (!itens || itens.length === 0) {
+      return res.status(400).json({ error: "A nota precisa ter ao menos um item" });
+    }
+
+    const valorTotal = itens.reduce(
+      (total, item) => total + item.quantidade * item.valorUnitario,
+      0
+    );
+
+    const ultimaNota = await prisma.notaFiscal.findFirst({
+      orderBy: { numero: "desc" }
+    });
+
+    const novoNumero = ultimaNota ? ultimaNota.numero + 1 : 1;
+
+    const nota = await prisma.notaFiscal.create({
+      data: {
+        clienteId,
+        tipo,
+        descricao,
+        observacao,
+        itens,
+        valorTotal,
+        numero: novoNumero,
+        status: "EMITIDA"
+      }
+    });
+
     return res.status(201).json(nota);
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
 }
 
-async function listar(req, res, next) {
+/* =========================
+   LISTAR NOTAS
+========================= */
+async function listar(req, res) {
   try {
-    const resultado = await listarNotas(req.query);
-    return res.status(200).json(resultado);
+    const {
+      status,
+      cliente,
+      tipo,
+      numero,
+      page = 1,
+      limit = 10
+    } = req.query;
+
+    const filtros = {};
+
+    if (status) filtros.status = status;
+    if (tipo) filtros.tipo = tipo;
+    if (numero) filtros.numero = Number(numero);
+    if (cliente) filtros.clienteId = cliente;
+
+    const skip = (Number(page) - 1) * Number(limit);
+
+    const [total, notas] = await Promise.all([
+      prisma.notaFiscal.count({ where: filtros }),
+      prisma.notaFiscal.findMany({
+        where: filtros,
+        include: {
+          cliente: true
+        },
+        orderBy: { numero: "desc" },
+        skip,
+        take: Number(limit)
+      })
+    ]);
+
+    return res.status(200).json({
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      totalPages: Math.ceil(total / limit),
+      notas
+    });
   } catch (err) {
-    next(err);
+    return res.status(500).json({ error: err.message });
   }
 }
 
-
-async function buscarPorId(req, res, next) {
+/* =========================
+   BUSCAR POR ID
+========================= */
+async function buscarPorId(req, res) {
   try {
-    const nota = await NotaFiscal.findById(req.params.id).populate("cliente");
+    const nota = await prisma.notaFiscal.findUnique({
+      where: { id: req.params.id },
+      include: { cliente: true }
+    });
 
     if (!nota) {
-      const error = new Error("Nota não encontrada");
-      error.statusCode = 404;
-      throw error;
+      return res.status(404).json({ error: "Nota não encontrada" });
     }
 
     return res.status(200).json({
@@ -40,41 +109,63 @@ async function buscarPorId(req, res, next) {
       data: nota
     });
   } catch (err) {
-    next(err);
+    return res.status(500).json({ error: err.message });
   }
 }
 
-
-
+/* =========================
+   ATUALIZAR NOTA
+========================= */
 async function atualizar(req, res) {
   try {
-    const nota = await atualizarNota(req.params.id, req.body);
+    const { descricao, itens } = req.body;
+
+    if (itens && itens.length === 0) {
+      return res.status(400).json({ error: "A nota deve ter ao menos um item" });
+    }
+
+    let valorTotal;
+    if (itens) {
+      valorTotal = itens.reduce(
+        (total, item) => total + item.quantidade * item.valorUnitario,
+        0
+      );
+    }
+
+    const nota = await prisma.notaFiscal.update({
+      where: { id: req.params.id },
+      data: {
+        descricao,
+        itens,
+        valorTotal
+      }
+    });
+
     return res.status(200).json(nota);
   } catch (err) {
     return res.status(404).json({ error: err.message });
   }
 }
 
-
-
-
-
-
-
+/* =========================
+   CANCELAR NOTA
+========================= */
 async function cancelar(req, res) {
   try {
-    const nota = await cancelarNota(req.params.id);
+    const nota = await prisma.notaFiscal.update({
+      where: { id: req.params.id },
+      data: { status: "CANCELADA" }
+    });
+
     return res.status(200).json(nota);
   } catch (err) {
-    return res.status(404).json({ error: err.message });
+    return res.status(404).json({ error: "Nota não encontrada" });
   }
 }
 
-
-
-
-
-
+/* =========================
+   DELETE BLOQUEADO
+========================= */
 function naoPermitirDelete(req, res) {
   return res.status(405).json({
     success: false,
@@ -82,16 +173,18 @@ function naoPermitirDelete(req, res) {
   });
 }
 
-
-
+/* =========================
+   RESUMO DASHBOARD
+========================= */
 async function resumoDashboard(req, res) {
   try {
-    const totalNotas = await NotaFiscal.countDocuments();
-    const notasCanceladas = await NotaFiscal.countDocuments({ status: "cancelada" });
-
-    const totalValor = await NotaFiscal.aggregate([
-      { $match: { status: "CANCELADA" } },
-      { $group: { _id: null, total: { $sum: "$valorTotal" } } }
+    const [totalNotas, notasCanceladas, valorEmitido] = await Promise.all([
+      prisma.notaFiscal.count(),
+      prisma.notaFiscal.count({ where: { status: "CANCELADA" } }),
+      prisma.notaFiscal.aggregate({
+        where: { status: "EMITIDA" },
+        _sum: { valorTotal: true }
+      })
     ]);
 
     return res.status(200).json({
@@ -99,15 +192,13 @@ async function resumoDashboard(req, res) {
       data: {
         totalNotas,
         notasCanceladas,
-        valorTotal: totalValor[0]?.total || 0
+        valorTotal: valorEmitido._sum.valorTotal || 0
       }
     });
   } catch (err) {
-    next(err);
+    return res.status(500).json({ error: err.message });
   }
 }
-
-
 
 module.exports = {
   criar,
