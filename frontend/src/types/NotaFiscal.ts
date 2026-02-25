@@ -2,7 +2,7 @@
 
 export type Cliente = {
   endereco: string | undefined;
-  _id: string;
+  id: string;
   nome: string;
   email: string;
   documento: string;
@@ -17,7 +17,7 @@ export type ItemNota = {
 export type NotaFiscal = {
   observacao: string;
   discriminacao: string;
-  _id: string;
+  id: string;
   numero: number;
   cliente: Cliente; 
   tipo: "SERVICO" | "PRODUTO";

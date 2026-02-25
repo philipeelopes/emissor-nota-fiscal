@@ -1,7 +1,7 @@
 
 require("dotenv").config();
 
-const app = require("./app"); // importa seu app.js com todas as rotas
+const app = require("./app"); // importa app.js com todas as rotas
 
 const PORT = process.env.PORT || 3333;
 

@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const clientesRoutes = require("./routes/clientes.routes");
+const empresaRoutes = require("./routes/empresa");
 const notasRoutes = require("./routes/notas.routes")
 const relatoriosRoutes = require("./routes/relatorios.routes");
-const empresaRoutes = require("./routes/empresa")
 const errorMiddleware = require("./middlewares/error.middleware");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./docs/swagger");
@@ -36,6 +36,7 @@ app.use(empresaRoutes)
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/clientes", clientesRoutes);
+app.use("/empresa", empresaRoutes);
 app.use("/notas", notasRoutes);
 
 

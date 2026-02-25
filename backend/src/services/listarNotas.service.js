@@ -33,7 +33,7 @@ async function listarNotas(query) {
   const limitNumber = Number(limit);
   const skip = (pageNumber - 1) * limitNumber;
 
-  // Prisma usa { field: 'asc' | 'desc' }
+  
   const orderBy = {};
   orderBy[sortBy] = order.toLowerCase() === "asc" ? "asc" : "desc";
 

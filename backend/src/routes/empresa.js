@@ -1,9 +1,14 @@
-const express = require("express");
-const router = express.Router();
+const { Router } = require("express");
 
-const { buscarEmpresa } = require("../controllers/empresa");
+const router = Router();
 
-
-router.get("/empresa", buscarEmpresa);
+router.get("/", async (req, res) => {
+  try {
+    //buscar empresa
+    res.status(200).json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 module.exports = router;

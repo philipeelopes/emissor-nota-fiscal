@@ -70,6 +70,7 @@
     width: auto;
     transform: scale(4.3);
     padding-right: 15px;
+   
 
 }
 
@@ -101,11 +102,13 @@
         flex-direction: row;
     }
      .logo{
-        transform: scale(2.8);
+        transform: scale(1.8);
         contain: cover;
         padding-left: 15px;
         
     }
+
+    
    
 }
 

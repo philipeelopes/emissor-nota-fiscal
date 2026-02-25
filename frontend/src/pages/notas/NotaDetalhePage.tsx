@@ -60,7 +60,7 @@ export default function DetalhesNota() {
     if (!confirmar) return;
 
     try {
-      await CancelarNota(nota._id);
+      await CancelarNota(nota.id);
       alert("Nota cancelada com sucesso!");
       window.location.reload();
     } catch (error) {
@@ -91,8 +91,12 @@ export default function DetalhesNota() {
 
   console.log("NOTA DO BACKEND:", nota);
 
+  if (!nota.numero) {
+    return <p>Carregando dados da nota...</p>;
+  }
+
   const notaDanfe: NotaDanfe = {
-    numero: nota.numero.toString(),
+    numero: String(nota.numero),
     dataEmissao: nota.dataEmissao,
 
     competencia: new Date(nota.dataEmissao).toLocaleDateString("pt-BR", {
@@ -111,9 +115,9 @@ export default function DetalhesNota() {
     },
 
     cliente: {
-      nome: nota.cliente.nome,
-      documento: nota.cliente.documento,
-      endereco: nota.cliente.endereco || ""
+      nome: nota.cliente?.nome ?? "Cliente não informado",
+      documento: nota.cliente?.documento ?? "-",
+      endereco: nota.cliente?.endereco ?? "",
     },
 
     itens: nota.itens.map(item => ({
@@ -175,8 +179,8 @@ export default function DetalhesNota() {
       </table>
 
       <h3>Total da Nota: R$ {totalCalculado.toLocaleString("pt-BR", {
-            minimumFractionDigits: 2,
-          })}</h3>
+        minimumFractionDigits: 2,
+      })}</h3>
 
 
       <div className={styles.buttons}>

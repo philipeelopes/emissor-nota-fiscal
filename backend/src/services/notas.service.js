@@ -30,7 +30,7 @@ async function criarNota({ clienteId, tipo, itens, descricao, observacao }) {
       clienteId,
       tipo,
       descricao,
-      itens,      // Prisma permite JSON
+      itens,     
       valorTotal,
       numero: novoNumero,
       observacao,

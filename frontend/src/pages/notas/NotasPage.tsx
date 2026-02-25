@@ -40,10 +40,10 @@ export default function NotasPage() {
             <tbody>
               {notas.map((nota) => (
                 <tr
-                  key={nota._id}
+                  key={nota.id}
                 >
                   <td >
-                    <Link className={styles.cliente} to={`/notas/${nota._id}`}>
+                    <Link className={styles.cliente} to={`/notas/${nota.id}`}>
                       {nota.cliente?.nome ?? "Cliente não iformado"}
                     </Link>
                   </td>
@@ -64,7 +64,7 @@ export default function NotasPage() {
 
                   <td>
                     <Link
-                      to={`/notas/${nota._id}`}
+                      to={`/notas/${nota.id}`}
                       className={styles.link}
                     >
                       Ver detalhes
