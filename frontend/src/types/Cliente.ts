@@ -6,3 +6,10 @@ export interface Cliente {
     telefone?: string;
     endereco?: String;
 }
+
+export type CriarClienteDTO = {
+  nome: string;
+  email: string;
+  documento: string;
+  endereco: string;
+};

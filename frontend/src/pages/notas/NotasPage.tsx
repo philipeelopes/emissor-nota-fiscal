@@ -6,14 +6,20 @@ import { NovaNota } from "./NovaNota";
 import styles from "../notas/Notas.module.css"
 
 export default function NotasPage() {
-  const [notas, setNotas] = useState<NotaFiscal[]>([]);
+  const [notas, setNotas] = useState<any[]>([]);
 
   useEffect(() => {
-    api.get<{ notas: NotaFiscal[] }>("/notas").then((response) => {
-      setNotas(response.data.notas);
-    });
-  }, []);
+    api.get("/notas")
+      .then((response) => {
 
+        const lista = response.data?.notas ?? response.data?.data?.notas ?? [];
+        setNotas(lista);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar notas:", error);
+        setNotas([]);
+      });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -58,9 +64,11 @@ export default function NotasPage() {
                       {nota.status}
                     </span>
                   </td>
-                  <td>R$ {nota.valorTotal.toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                  })}</td>
+                  <td>
+                    R$ {(nota.valorTotal ?? 0).toLocaleString("pt-BR", {
+                      minimumFractionDigits: 2,
+                    })}
+                  </td>
 
                   <td>
                     <Link

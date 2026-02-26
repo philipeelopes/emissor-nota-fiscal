@@ -33,6 +33,7 @@ export default function ClientesPage() {
 
         try {
             await deletarCliente(id);
+            setClientes((prev) => prev.filter(c => c.id !== id));
             carregarClientes();
         } catch (error) {
             console.error("Erro ao excluir cliente", error);
@@ -71,7 +72,7 @@ export default function ClientesPage() {
                     </thead>
                     <tbody>
                         {clientes.map((cliente) => (
-                            <tr key={cliente._id}>
+                            <tr key={cliente.id}>
                                 <td>{cliente.nome}</td>
                                 <td>{cliente.email}</td>
                                 <td>{cliente.documento}</td>
@@ -79,7 +80,7 @@ export default function ClientesPage() {
                                 <td>
                                     <button
                                         className={styles.btnExcluir}
-                                        onClick={() => handleExcluirCliente(cliente._id)}
+                                        onClick={() => handleExcluirCliente(cliente.id)}
                                     >
                                         Excluir
                                     </button>

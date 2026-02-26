@@ -36,7 +36,10 @@ async function criar(req, res) {
       }
     });
 
-    return res.status(201).json(nota);
+    return res.status(201).json({
+      success: true,
+      data: nota
+    });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
@@ -79,11 +82,14 @@ async function listar(req, res) {
     ]);
 
     return res.status(200).json({
-      total,
-      page: Number(page),
-      limit: Number(limit),
-      totalPages: Math.ceil(total / limit),
-      notas
+      success: true,
+      data: {
+        total,
+        page: Number(page),
+        limit: Number(limit),
+        totalPages: Math.ceil(total / limit),
+        notas
+      }
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });
@@ -141,7 +147,10 @@ async function atualizar(req, res) {
       }
     });
 
-    return res.status(200).json(nota);
+    return res.status(201).json({
+      success: true,
+      data: nota
+    });
   } catch (err) {
     return res.status(404).json({ error: err.message });
   }
@@ -157,7 +166,10 @@ async function cancelar(req, res) {
       data: { status: "CANCELADA" }
     });
 
-    return res.status(200).json(nota);
+    return res.status(200).json({
+      success: true,
+      data: nota
+    });
   } catch (err) {
     return res.status(404).json({ error: "Nota não encontrada" });
   }
@@ -192,7 +204,7 @@ async function resumoDashboard(req, res) {
       data: {
         totalNotas,
         notasCanceladas,
-        valorTotal: valorEmitido._sum.valorTotal || 0
+        valorTotal: valorEmitido._sum?.valorTotal ?? 0
       }
     });
   } catch (err) {

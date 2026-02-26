@@ -12,7 +12,7 @@ export async function buscarNotaPorId(
 
 export async function listarNotas(): Promise<NotaFiscal[]> {
     const response = await api.get("/notas");
-    return response.data;
+    return response.data.data;
 }
 
 export async function criarNota(data: {
@@ -21,11 +21,11 @@ export async function criarNota(data: {
     valorTotal: number;
 }): Promise<NotaFiscal> {
     const response = await api.post("/notas", data);
-    return response.data;
+    return response.data.data;
 }
 
 export async function CancelarNota(id: string){
   const response = await api.put(`/notas/${id}/cancelar`);
-  return response.data;
+  return response.data.data;
 
 }

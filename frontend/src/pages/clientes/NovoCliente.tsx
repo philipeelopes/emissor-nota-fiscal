@@ -30,6 +30,7 @@ export function NovoCliente({ onClienteCriado}: NovoClienteProps) {
                 email,
                 documento,
                 endereco,
+                
             });
 
 
