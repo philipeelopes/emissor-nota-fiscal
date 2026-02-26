@@ -1,5 +1,7 @@
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
+const { deletarCliente } = require("../controllers/clientes.controller");
+
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -69,24 +71,6 @@ router.put("/:id", async (req, res) => {
 
 //===============
 // "Deletar" cliente (inativar)
-router.delete("/:id", async (req, res) => {
-  try {
-    const cliente = await prisma.cliente.findUnique({
-      where: { id: req.params.id }
-    });
-
-    if (!cliente) return res.status(404).json({ error: "Cliente não encontrado" });
-    if (!cliente.ativo) return res.status(400).json({ error: "Cliente já está inativo" });
-
-    await prisma.cliente.update({
-      where: { id: req.params.id },
-      data: { ativo: false }
-    });
-
-    return res.json({ message: "Cliente deletado com sucesso" });
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
-  }
-});
+router.delete("/clientes/:id", deletarCliente);
 
 module.exports = router;
