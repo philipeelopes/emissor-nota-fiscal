@@ -23,10 +23,13 @@ export default function Home() {
   });
 
   useEffect(() => {
-    buscarDashboard()
-      .then(setDados)
-      .catch(() => alert("Erro ao carregar dashboard"));
-  }, []);
+  buscarDashboard()
+    .then((res) => {
+      console.log("DASHBOARD API:", res);
+      setDados(res);
+    })
+    .catch(() => alert("Erro ao carregar dashboard"));
+}, []);
 
   return (
     <div className={styles.container}>

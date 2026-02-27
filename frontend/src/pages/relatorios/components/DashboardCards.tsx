@@ -15,13 +15,13 @@ export function DashboardCards({ dashboard }: Props) {
 
       <div className={styles.card}>
         <strong>Canceladas</strong>
-        <p>{dashboard.notasCanceladas}</p>
+        <p>{dashboard.notasCanceladas ?? 0}</p>
       </div>
 
       <div className={styles.card}>
         <strong>Faturamento</strong>
         <p>
-          R$ {dashboard.valorEmitido.toLocaleString("pt-BR", {
+          R$ {(dashboard.valorEmitido ?? 0).toLocaleString("pt-BR", {
             minimumFractionDigits: 2,
           })}
         </p>

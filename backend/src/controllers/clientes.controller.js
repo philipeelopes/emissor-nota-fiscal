@@ -11,38 +11,37 @@ async function deletarCliente(req, res) {
 
     if (!cliente) {
       return res.status(404).json({
-        success: false,
-        message: "Cliente não encontrado"
+        error: "Cliente não encontrado"
       });
     }
 
-    if (!cliente.ativo) {
-      return res.status(400).json({
-        success: false,
-        message: "Cliente já está inativo"
+    // Verificar se existem notas vinculadas
+    const possuiNotas = await prisma.notaFiscal.count({
+      where: { clienteId: id }
+    });
+
+    if (possuiNotas > 0) {
+      return res.status(409).json({
+        error: "Não é possível excluir este cliente pois ele possui notas fiscais cadastradas."
       });
     }
 
-    // inativar (soft delete)
+    //Exclusão lógica
     await prisma.cliente.update({
       where: { id },
       data: { ativo: false }
     });
 
     return res.json({
-      success: true,
-      message: "Cliente inativado com sucesso"
+      message: "Cliente excluído com sucesso"
     });
 
   } catch (err) {
     console.error(err);
     return res.status(500).json({
-      success: false,
-      message: "Erro ao inativar cliente"
+      error: "Erro interno ao excluir cliente"
     });
   }
 }
 
-module.exports = {
-  deletarCliente
-};
+module.exports = { deletarCliente };

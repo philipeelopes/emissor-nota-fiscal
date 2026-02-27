@@ -147,21 +147,33 @@ async function totalClientes(req, res) {
 ========================= */
 async function dashboard(req, res) {
   try {
-    const totalNotas = await prisma.notaFiscal.count();
-    const notasCanceladas = await prisma.notaFiscal.count({ where: { status: "CANCELADA" } });
-    const valorEmitidoAgg = await prisma.notaFiscal.aggregate({
-      _sum: { valorTotal: true },
+    const totalNotas = await prisma.notaFiscal.count({
       where: { status: "EMITIDA" }
     });
 
-    return res.status(200).json({
+    const notasCanceladas = await prisma.notaFiscal.count({
+      where: { status: "CANCELADA" }
+    });
+
+    const faturamento = await prisma.notaFiscal.aggregate({
+      where: { status: "EMITIDA" },
+      _sum: { valorTotal: true }
+    });
+
+    const totalClientes = await prisma.cliente.count({
+      where: { ativo: true }
+    });
+
+    return res.json({
       totalNotas,
       notasCanceladas,
-      valorTotal: valorEmitidoAgg._sum.valorTotal || 0
+      valorEmitido: faturamento._sum.valorTotal ?? 0,
+      totalClientes: totalClientes ?? 0
     });
+
   } catch (err) {
     console.error(err);
-    return res.status(400).json({ success: false, message: "Erro ao carregar dados do dashboard" });
+    return res.status(500).json({ error: err.message });
   }
 }
 

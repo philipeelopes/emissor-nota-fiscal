@@ -33,18 +33,16 @@ export default function ClientesPage() {
 
         try {
             await deletarCliente(id);
-            setClientes((prev) => prev.filter(c => c.id !== id));
+            alert("Cliente excluído com sucesso");
             carregarClientes();
         } catch (error: any) {
             const mensagem =
-            error.response?.data?.mensage ||
-            "Erro ao excluir cliente";
+                error.response?.data?.error ||
+                "Erro inesperado ao excluir cliente";
 
-            alert(mensagem)
+            alert(mensagem);
         }
-
     }
-
 
 
 
