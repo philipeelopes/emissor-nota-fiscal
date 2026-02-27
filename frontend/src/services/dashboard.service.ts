@@ -1,4 +1,5 @@
 import { api } from "../api/api";
+import type { DashboardDTO } from "../types/Dashboard";
 
 export async function buscarResumoDashboard() {
   const response = await api.get("/notas/dashboard/resumo");
@@ -10,13 +11,15 @@ export async function buscarTotalClientes() {
   return response.data.total;
 }
 
-export async function buscarDashboard() {
-  const response = await api.get("/relatorios/dashboard");
-  return{
-    totalNotas: response.data.totalNotas,
-    notasCanceladas: response.data.notasCanceladas,
-    valorEmitido: response.data.valorEmitido, 
-    totalClientes: response.data.totalClientes
+
+export async function buscarDashboard(): Promise<DashboardDTO> {
+  const { data } = await api.get("/relatorios/dashboard");
+
+  return {
+    totalNotas: data.totalNotas ?? 0,
+    notasCanceladas: data.notasCanceladas ?? 0,
+    valorEmitido: data.valorEmitido ?? 0,
+    totalClientes: data.totalClientes ?? 0,
   };
 }
 

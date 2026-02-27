@@ -22,12 +22,9 @@ export default function Home() {
     totalClientes: 0
   });
 
-  useEffect(() => {
+ useEffect(() => {
   buscarDashboard()
-    .then((res) => {
-      console.log("DASHBOARD API:", res);
-      setDados(res);
-    })
+    .then(setDados)
     .catch(() => alert("Erro ao carregar dashboard"));
 }, []);
 
