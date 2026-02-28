@@ -1,207 +1,196 @@
 # 🧾 Emissor de Nota Fiscal – Backend API
 
-API REST desenvolvida em **Node.js + Express + MongoDB**, simulando um sistema real de **emissão de notas fiscais**, com foco em **boas práticas**, **arquitetura escalável**, **testes automatizados** e pronta para uso em **ambiente corporativo**.
+API REST desenvolvida em **Node.js + Express + PostgreSQL**, simulando um sistema real de **emissão de notas fiscais**, com foco em **boas práticas**, **arquitetura escalável**, **testes automatizados** e **containerização com Docker**.
 
-Este projeto foi construído para **portfólio**, mas seguindo padrões de um **sistema real utilizado por empresas**.
+Este projeto foi desenvolvido para **portfólio**, seguindo padrões utilizados em **aplicações corporativas reais**.
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
-* Node.js
-* Express
-* MongoDB + Mongoose
-* Jest (testes automatizados)
-* Supertest (testes de API)
-* Nodemon (ambiente de desenvolvimento)
-* Dotenv
+- Node.js
+- Express
+- PostgreSQL
+- Prisma ORM
+- Jest
+- Supertest
+- Docker & Docker Compose
+- Nodemon
+- Dotenv
 
 ---
 
 ## 📁 Estrutura do Projeto
 
-```
+
 src/
 ├── app.js
 ├── server.js
 ├── controllers/
-│   ├── notas.controller.js
-│   └── relatorios.controller.js
+│ ├── notas.controller.js
+│ └── relatorios.controller.js
 ├── services/
-│   ├── notas.service.js
-│   ├── listarNotas.service.js
-│   ├── atualizarNota.service.js
-│   ├── cancelarNota.service.js
-│   └── relatorios/
-│       ├── faturamento.service.js
-│       ├── mensal.service.js
-│       └── status.service.js
-├── models/
-│   ├── NotaFiscal.js
-│   └── Cliente.js
+│ ├── notas.service.js
+│ ├── listarNotas.service.js
+│ ├── atualizarNota.service.js
+│ ├── cancelarNota.service.js
+│ └── relatorios/
+│ ├── faturamento.service.js
+│ ├── mensal.service.js
+│ └── status.service.js
 ├── routes/
-│   ├── notas.routes.js
-│   ├── clientes.routes.js
-│   └── relatorios.routes.js
+│ ├── notas.routes.js
+│ ├── clientes.routes.js
+│ └── relatorios.routes.js
 ├── middlewares/
-│   └── error.middleware.js
+│ └── error.middleware.js
+├── prisma/
+│ ├── schema.prisma
+│ └── migrations/
 └── tests/
-```
 
-### Healthcheck
+
+📌 Arquitetura baseada em **Controller + Service**, garantindo:
+- Separação de responsabilidades
+- Código testável
+- Facilidade de manutenção
+- Escalabilidade
+
+---
+
+## 🩺 Healthcheck
+
+```http
 GET /health
 
+Usado para verificar se a API está online.
 
-📌 **Arquitetura baseada em Controller + Service**, garantindo separação de responsabilidades e escalabilidade.
+📌 Funcionalidades
+🧾 Notas Fiscais
 
----
+Criar nota fiscal
 
-## 📌 Funcionalidades
+Listar notas com paginação e filtros
 
-### ✔️ Notas Fiscais
+Buscar nota por ID
 
-* Criar nota fiscal
-* Listar notas com paginação, ordenação e filtros
-* Buscar nota por ID
-* Atualizar nota
-* Cancelar nota (não permite exclusão física)
+Atualizar nota
 
-### ✔️ Relatórios
+Cancelar nota (sem exclusão física)
 
-* Faturamento mensal
-* Faturamento por cliente
-* Quantidade de notas emitidas x canceladas
+📊 Relatórios
 
----
+Faturamento mensal
 
-## 🧪 Testes Automatizados
+Faturamento por cliente
 
-O projeto possui **testes automatizados cobrindo regras de negócio, controllers e serviços**.
+Total de notas emitidas
 
-Executar testes:
+Total de notas canceladas
 
-```bash
+Dashboard resumido
+
+🧪 Testes Automatizados
+
+O projeto possui testes automatizados, cobrindo:
+
+Controllers
+
+Services
+
+Regras de negócio
+
+Executar testes
 npm test
-```
-
-Executar testes com cobertura:
-
-```bash
+Executar testes com cobertura
 npm test -- --coverage
-```
-
-📊 Cobertura atual inclui:
-
-* Criação de notas
-* Atualização
-* Cancelamento
-* Listagem com paginação
-* Relatórios
-
----
-
-## ⚙️ Configuração do Ambiente
-
-### 1️⃣ Clonar o repositório
-
-```bash
+⚙️ Configuração do Ambiente (Local)
+1️⃣ Clonar o repositório
 git clone <url-do-repositorio>
 cd backend
-```
-
-### 2️⃣ Instalar dependências
-
-```bash
+2️⃣ Instalar dependências
 npm install
-```
-
-### 3️⃣ Criar arquivo `.env`
-
-```env
+3️⃣ Criar arquivo .env
 PORT=3333
-MONGO_URI=mongodb://localhost:27017/emissor-nota
-```
-
-### 4️⃣ Rodar o projeto
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/emissor_nf
+4️⃣ Executar migrations
+npx prisma migrate dev
+5️⃣ Rodar o projeto
 
 Modo desenvolvimento:
 
-```bash
 npm run dev
-```
 
 Modo produção:
 
-```bash
 npm start
-```
+🐳 Executando com Docker
 
----
+O projeto está preparado para rodar com Docker + Docker Compose, incluindo o banco PostgreSQL.
 
-
-## 🐳 Executando com Docker
-
-O projeto está preparado para rodar via **Docker + Docker Compose**, incluindo MongoDB.
-
-### Subir a aplicação:
-```bash
+Subir a aplicação:
 docker-compose up --build
 
----
+A API ficará disponível em:
 
+http://localhost:3333
+🌐 Principais Rotas
+Notas
 
+POST /notas
 
-## 🌐 Rotas Principais
+GET /notas
 
-### Notas
+GET /notas/:id
 
-* `POST /notas` → Criar nota
-* `GET /notas` → Listar notas
-* `GET /notas/:id` → Buscar nota por ID
-* `PUT /notas/:id` → Atualizar nota
-* `PATCH /notas/:id/cancelar` → Cancelar nota
+PUT /notas/:id
 
-### Relatórios
+PATCH /notas/:id/cancelar
 
-* `GET /relatorios/mensal`
-* `GET /relatorios/por-cliente`
-* `GET /relatorios/status`
+Relatórios
 
----
+GET /relatorios/dashboard
 
-## 📚 Documentação da API (Swagger)
+GET /relatorios/mensal
 
-A API possui documentação interativa gerada com **Swagger / OpenAPI**.
+GET /relatorios/por-cliente
 
-Após rodar o projeto, acesse:
+GET /relatorios/status
 
-http://localhost:3333/docs
+🔐 Boas Práticas Aplicadas
 
-Nela é possível:
-- Visualizar todas as rotas
-- Testar endpoints diretamente pelo navegador
-- Ver exemplos de payloads e respostas
+Separação de responsabilidades
 
----
+Regras de negócio isoladas
 
-## 🧠 Boas Práticas Aplicadas
+Padrão REST
 
-* Separação de responsabilidades (Controller / Service)
-* Regras de negócio isoladas
-* Testes automatizados desde o início
-* Código preparado para escalar
-* Padrão REST
-* Tratamento de erros
+Tratamento global de erros
 
----
+ORM com migrations versionadas
 
+Ambiente isolado com Docker
 
-## 👨‍💻 Autor
+Testes automatizados
 
-Projeto desenvolvido por **Philipe L**
+🚀 Deploy (Planejado)
 
-🔗 Backend focado em aprendizado avançado, arquitetura limpa e padrões profissionais.
+A API está preparada para deploy em plataformas como:
 
----
+Railway
 
-🚀 **Projeto pronto para uso real e apresentação em portfólio**
+Render
+
+Fly.io
+
+Bastando configurar as variáveis de ambiente:
+
+DATABASE_URL
+
+PORT
+
+👨‍💻 Autor
+
+Projeto desenvolvido por Philipe L
+
+Backend focado em aprendizado avançado, arquitetura limpa e padrões profissionais.

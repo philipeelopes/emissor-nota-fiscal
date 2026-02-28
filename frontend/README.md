@@ -1,73 +1,141 @@
-# React + TypeScript + Vite
+# 🎨 Frontend – Emissor de Notas Fiscais (NFS-e)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação frontend do sistema **Emissor de Notas Fiscais**, desenvolvida com **React** e **TypeScript**, focada em **usabilidade**, **responsividade** e **visualização de dados financeiros**.
 
-Currently, two official plugins are available:
+Este frontend consome uma **API REST** própria, exibindo informações de notas fiscais, clientes e relatórios através de dashboards e gráficos interativos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📸 Visão Geral
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Interface moderna e responsiva
+- Dashboard com indicadores financeiros
+- Listagem e detalhamento de notas fiscais
+- Relatórios visuais por gráficos
+- Navegação simples e intuitiva
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Funcionalidades
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🧾 Notas Fiscais
+- Listagem de notas fiscais
+- Visualização detalhada da nota
+- Cancelamento de notas
+- Exibição de status (Ativa / Cancelada)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 👥 Clientes
+- Listagem de clientes
+- Visualização de clientes ativos
+- Integração com notas fiscais
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 📊 Dashboard
+- Total de notas emitidas
+- Total de notas canceladas
+- Valor total faturado
+- Indicadores rápidos de negócio
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 📈 Relatórios
+- Faturamento mensal
+- Faturamento por cliente
+- Comparativo de períodos
+- Gráficos interativos (barras e linhas)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠 Tecnologias Utilizadas
+
+- React
+- TypeScript
+- Vite
+- React Router DOM
+- Axios
+- Recharts
+- CSS Modules
+
+---
+
+## 🧱 Estrutura de Pastas
+
+```text
+src/
+├── assets/
+├── components/
+├── pages/
+│   ├── dashboard/
+│   ├── notas/
+│   ├── clientes/
+│   └── relatorios/
+├── services/
+├── styles/
+├── types/
+└── main.tsx
+
+⚙️ Configuração do Ambiente
+Pré-requisitos
+
+Node.js 18+
+
+Gerenciador de pacotes (npm ou yarn)
+
+Instalação
+npm install
+Variáveis de Ambiente
+
+Crie um arquivo .env na raiz do frontend:
+
+VITE_API_URL=http://localhost:3333
+▶️ Executando o Projeto
+Ambiente de Desenvolvimento
+npm run dev
+
+A aplicação estará disponível em:
+
+http://localhost:5173
+🌐 Integração com Backend
+
+O frontend consome uma API REST responsável por:
+
+Notas fiscais
+
+Clientes
+
+Dashboard
+
+Relatórios
+
+O backend deve estar em execução para que os dados sejam exibidos corretamente.
+
+📱 Responsividade
+
+A interface foi desenvolvida pensando em:
+
+Desktop
+
+Tablets
+
+Smartphones
+
+Permitindo acesso completo ao sistema através de dispositivos móveis.
+
+🚀 Deploy (planejado)
+
+O frontend está preparado para deploy em plataformas como:
+
+Vercel
+
+Netlify
+
+Com simples configuração da variável:
+
+VITE_API_URL=https://sua-api-em-producao.com
+📌 Observações
+
+Este frontend faz parte de um projeto maior e está em constante evolução.
+Novas melhorias de UX, performance e validações estão previstas.
+
+👨‍💻 Autor
+
+Philipe L.
+Estudante de Ciência da Computação
+Desenvolvedor Frontend e Backend
