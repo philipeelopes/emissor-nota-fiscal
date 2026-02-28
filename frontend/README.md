@@ -99,7 +99,7 @@ O frontend consome uma API REST responsável por:
 Notas fiscais
 
 Clientes
-
+postgresql://emissor_postgres_user:XNgdRQsrljaz55m0FX61geSBYZL1pkG6@dpg-d6ersudm5p6s73fs2360-a/emissor_postgres
 Dashboard
 
 Relatórios
