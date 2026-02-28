@@ -15,7 +15,7 @@ export default function Danfe({ nota }: DanfeProps) {
 
   const itens = Array.isArray(nota?.itens) ? nota.itens : [];
 
-  const total =
+  
     itens.reduce(
       (acc: number, item: any) =>
         acc +
