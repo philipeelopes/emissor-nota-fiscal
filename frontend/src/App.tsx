@@ -10,6 +10,7 @@ import NotaDetalhePage from "./pages/notas/NotaDetalhePage";
 import "./App.css";
 
 // Lazy pages
+const About = lazy(() => import("./pages/about/About"))
 const Home = lazy(() => import("./pages/home/Home"));
 const Notas = lazy(() => import("./pages/notas/NotasPage"));
 const Clientes = lazy(() => import("./pages/clientes/ClientesPage"));
@@ -20,21 +21,31 @@ export default function App() {
     <>
       <Header />
 
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          {/* FULLSCREEN */}
+          <Route path="/about" element={<About />} />
 
-      <Container>
-        <PageLoader>
-          <Suspense fallback={<Loader />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/notas" element={<Notas />} />
-              <Route path="/notas/:id" element={<NotaDetalhePage />} />
-              <Route path="/clientes" element={<Clientes />} />
-              <Route path="/relatorios" element={<Relatorios />} />
-            </Routes>
-          </Suspense>
-        </PageLoader>
-      </Container>
+          {/* COM CONTAINER */}
+          <Route
+            path="/*"
+            element={
+              <Container>
+                <PageLoader>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/notas" element={<Notas />} />
+                    <Route path="/notas/:id" element={<NotaDetalhePage />} />
+                    <Route path="/clientes" element={<Clientes />} />
+                    <Route path="/relatorios" element={<Relatorios />} />
+                  </Routes>
+                </PageLoader>
+              </Container>
+            }
+          />
+        </Routes>
+      </Suspense>
     </>
   );
 }

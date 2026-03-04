@@ -16,9 +16,15 @@ div{
 *{
        margin: 0;
        padding: 0;
+       
 
 }
 
 body{
         background-color: #fcfcfc;
+}
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }

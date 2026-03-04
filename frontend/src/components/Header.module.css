@@ -11,6 +11,15 @@
     overflow: hidden;
 }
 
+.transparent {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
 .menu {
     font-size: 1.3rem;
     display: flex;
@@ -24,6 +33,7 @@
     gap: 8px;
 }
 
+.about,
 .nota,
 .clientes,
 .relatorios,
@@ -34,6 +44,7 @@
     transition: 0.5s;
 }
 
+.about:hover,
 .nota:hover,
 .clientes:hover,
 .home:hover  {
