@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { api } from "../../api/api";
-import type { NotaFiscal } from "../../types/NotaFiscal";
 import { Link } from "react-router-dom";
 import { NovaNota } from "./NovaNota";
 import styles from "../notas/Notas.module.css"
@@ -22,6 +21,8 @@ export default function NotasPage() {
   }, []);
 
   return (
+
+
     <div className={styles.container}>
 
       <NovaNota />
@@ -84,7 +85,8 @@ export default function NotasPage() {
           </table>
         )}
       </div>
-
     </div>
+  
+ 
   );
 }

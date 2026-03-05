@@ -10,7 +10,6 @@ import NotaDetalhePage from "./pages/notas/NotaDetalhePage";
 import "./App.css";
 
 // Lazy pages
-const About = lazy(() => import("./pages/about/About"))
 const Home = lazy(() => import("./pages/home/Home"));
 const Notas = lazy(() => import("./pages/notas/NotasPage"));
 const Clientes = lazy(() => import("./pages/clientes/ClientesPage"));
@@ -23,10 +22,6 @@ export default function App() {
 
       <Suspense fallback={<Loader />}>
         <Routes>
-          {/* FULLSCREEN */}
-          <Route path="/about" element={<About />} />
-
-          {/* COM CONTAINER */}
           <Route
             path="/*"
             element={

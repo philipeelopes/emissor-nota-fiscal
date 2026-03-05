@@ -135,8 +135,8 @@ export default function DetalhesNota() {
 
 
   return (
-
-    <div className={styles.container}>
+  <div className={styles.page}> 
+    <div className={styles.pageContainer}>
       <h2>Nota Fiscal Nº {nota.numero}</h2>
 
       <p>
@@ -208,8 +208,7 @@ export default function DetalhesNota() {
           )
         }
       </div>
-
-
     </div>
+  </div>
   );
 }

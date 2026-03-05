@@ -1,5 +1,13 @@
 
 
+.container{
+  width: 97vw;
+  box-sizing: border-box;
+
+
+}
+
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -159,10 +167,18 @@
 
 /* responssivo*/
 /*notebook*/
-@media (max-width: 1024px) {
+@media (max-width: 1366px) {
+  .container{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    padding-right: 60px;
+  }
+
   .cards {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 16px;
+ 
   }
   .filtro input {
     width: 250px;
@@ -171,6 +187,9 @@
 
 /*mobile*/
 @media (max-width: 768px) {
+  .container{
+    width: auto;
+  }
 
   .filtro {
    
@@ -195,10 +214,14 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     border-radius: 12px;
+    
+   
   }
 
+  
+
   .tabela{
-    width: auto;
+    width: 100%;
   }
 
   .card strong {

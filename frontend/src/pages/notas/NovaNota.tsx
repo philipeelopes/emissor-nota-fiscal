@@ -81,6 +81,10 @@ export function NovaNota() {
     }
 
     return (
+        
+
+
+        
         <form className={styles.form} onSubmit={handleSubmit}>
             <h2>Emitir Nota Fiscal</h2>
 
@@ -161,5 +165,6 @@ export function NovaNota() {
                 {loading ? "Emitindo..." : "Emitir Nota"}
             </button>
         </form >
+  
     );
 }
