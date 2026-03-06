@@ -1,0 +1,68 @@
+
+.features{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    
+}
+
+.features h1{
+     font-size: 2.8em;
+     font-weight: bolder;
+     margin-top: 6rem;
+     
+}
+.features h1, .principal{
+    display: flex;
+    justify-content: center;
+    padding-top:20px ;
+}
+
+.principal{
+    font-size: 1.3rem;
+    color: rgb(54, 54, 54);  
+}
+
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding-top: 100px;
+}
+
+.pages{
+    width: 400px;
+    height: 150px;
+    
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.089);
+    border-radius: 20px;
+    padding: 50px;   
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.4s;
+}
+
+.pages:hover{
+    transform: scale(1.03);
+    transition: 0.4s;
+    box-shadow: 1px 7px 10px 1px rgba(0, 0, 0, 0.123);
+    border: 1px solid  #ff8b0e;;
+
+}
+
+.pages h2{
+    font-size: 1.4rem;
+    font-weight: bolder;
+}
+
+.pages p{
+    color: rgb(54, 54, 54);
+    padding-top: 30px;
+}

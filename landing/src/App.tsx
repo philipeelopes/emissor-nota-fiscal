@@ -1,6 +1,18 @@
+import styles from "./App.module.css"
+import Features from "./components/features/Features";
+import Home from "./pages/home/Home"
+
+
+export default function App() {
+  return (
+    <main className={styles.main}>
+
+      <Home />
+      <Features />
+    </main>
 
 
 
-export default function App(){
 
+  );
 }
