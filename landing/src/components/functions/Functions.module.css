@@ -1,0 +1,44 @@
+
+
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    
+}
+
+.pages{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    
+}
+
+.cards{
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+   
+}
+
+.pages h1{
+    font-size: 1.2rem;
+    
+}
+
+
+
+.icons{
+    font-size: 100px;
+    color: white;
+    background: #D4A97D;
+    border-radius: 10px;
+}

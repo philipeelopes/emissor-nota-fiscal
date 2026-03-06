@@ -1,8 +1,3 @@
-*{
-    padding: 0;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif ;
-}
 
 .hero{
   position: relative;
@@ -62,7 +57,6 @@
     padding-right: 10px;
     
 }
-
 .buttons{
   display: flex;
   justify-content: center;
@@ -77,12 +71,23 @@
   text-decoration: none;
   font-weight: bold;
   transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.primary:hover{
+.primary:hover {
   transform: scale(1.08);
   box-shadow: 0 10px 30px rgba(230,202,127,0.4);
 }
+
+.iconArrow{
+   display: flex;
+   color: black;
+}
+
+
+
 
 .secondary{
   border:2px solid rgba(255,255,255,0.4);

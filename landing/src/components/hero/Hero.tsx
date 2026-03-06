@@ -1,7 +1,7 @@
 import styles from "../hero/Hero.module.css"
 import video from "../../assets/videos/teste3.mp4"
-import { FaBaby } from "react-icons/fa"
-import { FaBold, FaCircle, FaSchoolCircleXmark } from "react-icons/fa6"
+import { FaArrowRight, FaCircle } from "react-icons/fa6"
+
 
 export default function Hero() {
     return (
@@ -33,7 +33,9 @@ export default function Hero() {
                         href="https://emissor-nota-fiscal-kh8r.vercel.app/"
                         className={styles.primary}
                     >
+
                         Testar Aplicação
+                        <FaArrowRight className={styles.iconArrow} />
                     </a>
 
                     <a href="#features" className={styles.secondary}>
@@ -43,15 +45,15 @@ export default function Hero() {
 
                 <div className={styles.dados}>
                     <p>
-                        <FaCircle className={styles.icon}/>
+                        <FaCircle className={styles.icon} />
                         100% em nuvem
                     </p>
                     <p>
-                        <FaCircle className={styles.icon}/>
+                        <FaCircle className={styles.icon} />
                         Segurança certificada
                     </p>
                     <p>
-                        <FaCircle className={styles.icon}/>
+                        <FaCircle className={styles.icon} />
                         Suporte dedicado
                     </p>
                 </div>

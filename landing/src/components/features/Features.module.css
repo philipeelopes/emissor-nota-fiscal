@@ -1,5 +1,6 @@
 
 .features{
+    background: #FEFEFE ;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -47,22 +48,38 @@
     flex-direction: column;
     justify-content: center;
     transition: 0.4s;
+
 }
 
 .pages:hover{
     transform: scale(1.03);
     transition: 0.4s;
     box-shadow: 1px 7px 10px 1px rgba(0, 0, 0, 0.123);
-    border: 1px solid  #ff8b0e;;
+    border: 1px solid  #ff8b0e;
 
 }
 
 .pages h2{
     font-size: 1.4rem;
     font-weight: bolder;
+    
 }
 
 .pages p{
     color: rgb(54, 54, 54);
     padding-top: 30px;
+}
+
+.icons{
+ font-size: 60px;
+ color: #D4A97D; 
+ background: #d4a87d23;
+ border-radius: 10px;
+ transition: all 0.3s ease;
+}
+
+.pages:hover .icons{
+    transform: scale(1.02) translateY(-5px);
+    color: white;
+    background:  #D4A97D ;
 }
