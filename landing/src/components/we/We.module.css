@@ -1,0 +1,34 @@
+
+.we{
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    box-sizing: border-box;
+}
+
+
+.nos{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  
+
+}
+.card{
+    padding: 50px;
+    box-shadow: 1px 1px 1px  1px black;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+
+}

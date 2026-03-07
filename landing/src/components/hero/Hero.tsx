@@ -61,6 +61,13 @@ export default function Hero() {
 
             </div>
 
+            <div className={styles.scrollIndicator}>
+                <span></span>
+                <div className={styles.mouse}>
+                    <div className={styles.wheel}></div>
+                </div>
+            </div>
+
         </section>
     )
 }

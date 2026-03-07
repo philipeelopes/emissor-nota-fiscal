@@ -115,6 +115,69 @@
     font-size: 1rem;
 }
 
+.scrollIndicator{
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mouse{
+  width: 28px;
+  height: 45px;
+
+  border: 2px solid white;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+
+  animation: bounce 2s infinite;
+}
+
+.wheel{
+  width: 4px;
+  height: 8px;
+  background: white;
+  border-radius: 2px;
+
+  margin-top: 6px;
+
+  animation: scroll 1.8s infinite;
+}
+
+@keyframes bounce{
+
+  0%, 100%{
+    transform: translateY(0);
+  }
+
+  50%{
+    transform: translateY(8px);
+  }
+
+}
+
+@keyframes scroll {
+
+  0%{
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  50%{
+    opacity: 1;
+  }
+
+  100%{
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  
+
+}
+
 /*celulares*/
  @media (max-width: 768px) {
 
