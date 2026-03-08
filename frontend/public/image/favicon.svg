@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- fundo -->
+  <rect x="8" y="4" width="40" height="56" rx="8" fill="#D4A97D"></rect>
+
+  <!-- linhas da nota -->
+  <line x1="16" y1="20" x2="40" y2="20" stroke="white" stroke-width="3" stroke-linecap="round"></line>
+  <line x1="16" y1="28" x2="40" y2="28" stroke="white" stroke-width="3" stroke-linecap="round"></line>
+  <line x1="16" y1="36" x2="34" y2="36" stroke="white" stroke-width="3" stroke-linecap="round"></line>
+
+  <!-- check de confirmação -->
+  <circle cx="46" cy="46" r="10" fill="#22c55e"></circle>
+  <path d="M42 46 L45 49 L50 43" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
