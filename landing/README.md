@@ -9,7 +9,7 @@ A página apresenta os principais benefícios do sistema, estatísticas, funcion
 ## 🚀 Acesse o projeto
 
 🌐 Landing Page  
-https://SEU-LINK-VERCEL.vercel.app
+https://emissor-nota-fiscal-j3p4.vercel.app/
 
 💻 Aplicação Web  
 https://emissor-nota-fiscal-kh8r.vercel.app/
@@ -82,7 +82,7 @@ A landing page foi publicada utilizando:
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **[Seu Nome]**
+Desenvolvido por **[Philipe]**
 
-LinkedIn: https://linkedin.com  
-GitHub: https://github.com
+[LinkedIn: https://linkedin.com  ](https://www.linkedin.com/in/philipe-lopes-9abba5320/)
+https://github.com/philipeelopes?tab=repositories
